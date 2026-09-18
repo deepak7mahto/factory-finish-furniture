@@ -141,7 +141,7 @@ export default function AdminImporter({ isOpen, onClose, onAddProductToCatalog, 
               </div>
 
               <div>
-                <label className="text-slate-400 block mb-1">Factory Price (₹)</label>
+                <label className="text-slate-400 block mb-1">Factory Price (Internal Reference, Hidden)</label>
                 <input
                   type="number"
                   value={parsedProduct.price}
@@ -151,7 +151,7 @@ export default function AdminImporter({ isOpen, onClose, onAddProductToCatalog, 
               </div>
 
               <div>
-                <label className="text-slate-400 block mb-1">Estimated Retail MRP (₹)</label>
+                <label className="text-slate-400 block mb-1">Estimated Retail MRP (Internal Reference, Hidden)</label>
                 <input
                   type="number"
                   value={parsedProduct.originalPrice}

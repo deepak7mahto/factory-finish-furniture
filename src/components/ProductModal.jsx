@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, MessageCircle, Ruler, Shield, Sparkles, Box, CheckCircle2, Truck, Share2 } from 'lucide-react';
+import { X, MessageCircle, Ruler, Shield, Sparkles, Box, CheckCircle2, Truck } from 'lucide-react';
 import { generateWhatsAppUrl } from '../utils/whatsapp';
 import { getCategorySvg } from '../utils/placeholders';
 
@@ -15,10 +15,6 @@ export default function ProductModal({ product, onClose }) {
   const imageSource = product.image && !imageError
     ? `./images/products/${product.image}`
     : getCategorySvg(product.category, product.title);
-
-  const savings = product.originalPrice && product.price
-    ? product.originalPrice - product.price
-    : 0;
 
   const waUrl = generateWhatsAppUrl(product, {
     pincode,
@@ -85,29 +81,19 @@ export default function ProductModal({ product, onClose }) {
                 {product.title}
               </h2>
 
-              {/* Pricing Callout */}
+              {/* Pricing Notice Box */}
               <div className="mt-4 p-4 rounded-2xl bg-[#1c1f24] border border-slate-800 flex items-center justify-between">
                 <div>
-                  <span className="text-[11px] text-slate-400 uppercase tracking-wider block">Factory Direct Rate</span>
-                  <div className="flex items-baseline space-x-2.5">
-                    <span className="text-2xl sm:text-3xl font-extrabold text-white">
-                      ₹{product.price.toLocaleString('en-IN')}
-                    </span>
-                    {product.originalPrice && (
-                      <span className="text-sm text-slate-500 line-through">
-                        ₹{product.originalPrice.toLocaleString('en-IN')}
-                      </span>
-                    )}
-                  </div>
+                  <span className="text-sm font-bold text-gold-400 block">
+                    Factory Price Rate on Request
+                  </span>
+                  <span className="text-xs text-slate-400 mt-0.5 block">
+                    Direct workshop quote based on your selected size &amp; finish
+                  </span>
                 </div>
-                {savings > 0 && (
-                  <div className="text-right">
-                    <span className="px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold block">
-                      SAVE ₹{savings.toLocaleString('en-IN')}
-                    </span>
-                    <span className="text-[10px] text-slate-400 mt-0.5 block">vs. Showroom MRP</span>
-                  </div>
-                )}
+                <span className="px-3 py-1 rounded-lg bg-gold-500/10 border border-gold-500/30 text-gold-400 text-xs font-semibold whitespace-nowrap">
+                  Factory Direct
+                </span>
               </div>
 
               {/* Specifications Matrix */}
@@ -178,7 +164,7 @@ export default function ProductModal({ product, onClose }) {
               {/* Custom Order / WhatsApp Inquiry Inputs */}
               <div className="mt-6 pt-4 border-t border-slate-800 space-y-3">
                 <span className="text-xs font-semibold text-gold-400 block">
-                  Customize &amp; Check Pincode Delivery:
+                  Check Delivery &amp; Get Price Quote:
                 </span>
                 
                 <div className="grid grid-cols-2 gap-2 text-xs">
@@ -217,7 +203,7 @@ export default function ProductModal({ product, onClose }) {
                 className="w-full py-3.5 px-4 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-sm transition flex items-center justify-center space-x-2 shadow-xl shadow-green-900/30"
               >
                 <MessageCircle className="w-5 h-5 fill-white text-transparent" />
-                <span>Inquire &amp; Order on WhatsApp</span>
+                <span>Get Factory Rate Quote on WhatsApp</span>
               </a>
               <p className="text-center text-[11px] text-slate-500 mt-2">
                 Replies typically within 1 hour • Workshop visits by appointment in Delhi

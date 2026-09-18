@@ -12,14 +12,10 @@ export default function ProductCard({ product, onSelect }) {
     ? `./images/products/${product.image}`
     : getCategorySvg(product.category, product.title);
 
-  const savings = product.originalPrice && product.price
-    ? product.originalPrice - product.price
-    : 0;
-
   return (
     <div className="group bg-[#15171b] border border-slate-800/90 rounded-2xl overflow-hidden hover:border-gold-500/40 hover:shadow-2xl hover:shadow-gold-500/5 transition-all duration-300 flex flex-col justify-between">
       <div>
-        {/* Image Container with Badge */}
+        {/* Image Container with Badges */}
         <div className="relative aspect-[16/10] bg-[#1a1d22] overflow-hidden cursor-pointer" onClick={() => onSelect(product)}>
           <img
             src={imageSource}
@@ -44,12 +40,10 @@ export default function ProductCard({ product, onSelect }) {
             )}
           </div>
 
-          {/* Direct Savings Badge */}
-          {savings > 0 && (
-            <div className="absolute top-3 right-3 bg-emerald-500/90 text-charcoal-950 text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow-md">
-              SAVE ₹{savings.toLocaleString('en-IN')}
-            </div>
-          )}
+          {/* Value Callout Badge */}
+          <div className="absolute top-3 right-3 bg-gold-500/90 text-charcoal-950 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shadow-md uppercase tracking-wider">
+            Factory Direct
+          </div>
 
           {/* Quick view overlay hint */}
           <div className="absolute inset-0 bg-charcoal-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -92,24 +86,19 @@ export default function ProductCard({ product, onSelect }) {
             </span>
           </div>
 
-          {/* Price Box */}
-          <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-baseline justify-between">
+          {/* Rate Notice Box (No numeric price) */}
+          <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between">
             <div>
-              <div className="flex items-baseline space-x-2">
-                <span className="text-xl font-bold text-white tracking-tight">
-                  ₹{product.price.toLocaleString('en-IN')}
-                </span>
-                {product.originalPrice && (
-                  <span className="text-xs text-slate-500 line-through">
-                    ₹{product.originalPrice.toLocaleString('en-IN')}
-                  </span>
-                )}
-              </div>
-              <span className="text-[10px] text-emerald-400 font-medium">
-                Factory Price Rate
+              <span className="text-sm font-semibold text-gold-400 tracking-wide block">
+                Factory Rate on Request
+              </span>
+              <span className="text-[10px] text-slate-400">
+                Delhi Manufacturer Rate • Custom Sizing
               </span>
             </div>
-            <span className="text-[10px] text-slate-400">Delhi Direct</span>
+            <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-medium">
+              Pan-India
+            </span>
           </div>
         </div>
       </div>
@@ -131,7 +120,7 @@ export default function ProductCard({ product, onSelect }) {
           className="w-full py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white text-xs font-bold transition flex items-center justify-center space-x-1.5 shadow-md shadow-green-950/40"
         >
           <MessageCircle className="w-3.5 h-3.5 fill-white text-transparent" />
-          <span>Order</span>
+          <span>Get Price</span>
         </a>
       </div>
     </div>

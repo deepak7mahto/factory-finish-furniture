@@ -1,7 +1,7 @@
 import siteConfig from '../data/siteConfig.json';
 
 /**
- * Generates an encoded WhatsApp URL for product inquiry
+ * Generates an encoded WhatsApp URL for product inquiry without displaying hardcoded prices
  */
 export function generateWhatsAppUrl(product, options = {}) {
   const phone = options.phone || siteConfig.whatsappNumber;
@@ -11,11 +11,10 @@ export function generateWhatsAppUrl(product, options = {}) {
   const customColor = options.customColor ? options.customColor.trim() : '';
 
   let message = `Hello Factory Finish Furniture,\n\n`;
-  message += `I'm inquiring from your online catalog about:\n`;
+  message += `I would like to get the direct factory rate and availability for:\n`;
   message += `*${product.title}*\n`;
   message += `• Item ID: ${product.id}\n`;
-  message += `• Factory Price: ₹${product.price ? product.price.toLocaleString('en-IN') : 'N/A'}\n`;
-  message += `• Standard Size: ${product.size || 'Standard'}\n`;
+  message += `• Standard Dimensions: ${product.size || 'Standard'}\n`;
 
   if (customDimensions) {
     message += `• Requested Custom Size: ${customDimensions}\n`;
@@ -27,10 +26,10 @@ export function generateWhatsAppUrl(product, options = {}) {
     message += `• Delivery Pincode: ${pincode}\n`;
   }
   if (notes) {
-    message += `• Message/Notes: ${notes}\n`;
+    message += `• Custom Requirements: ${notes}\n`;
   }
 
-  message += `\nPlease share live photos, video walkaround, and delivery timeline.`;
+  message += `\nPlease share the factory price quote, photos, video walkaround, and delivery timeline.`;
 
   return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 }
@@ -38,8 +37,8 @@ export function generateWhatsAppUrl(product, options = {}) {
 /**
  * Generates a general WhatsApp inquiry link (e.g. for custom order / questions)
  */
-export function generateGeneralWhatsAppUrl(subject = 'Custom Furniture Inquiry') {
+export function generateGeneralWhatsAppUrl(subject = 'Factory Rate & Custom Design Inquiry') {
   const phone = siteConfig.whatsappNumber;
-  const message = `Hello Factory Finish Furniture,\n\nI would like to discuss a ${subject}. Please let me know how we can proceed with design and custom quotation.`;
+  const message = `Hello Factory Finish Furniture,\n\nI would like to discuss a ${subject}. Please share catalog details and factory pricing for my requirements.`;
   return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 }

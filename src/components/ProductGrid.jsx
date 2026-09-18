@@ -1,10 +1,9 @@
 import React, { useState, useMemo } from 'react';
-import { Search, SlidersHorizontal, X } from 'lucide-react';
+import { Search, X } from 'lucide-react';
 import ProductCard from './ProductCard';
 
 export default function ProductGrid({ products, activeCategory, onSelectCategory, onSelectProduct }) {
   const [searchQuery, setSearchQuery] = useState('');
-  const [priceFilter, setPriceFilter] = useState('ALL');
   const [sortBy, setSortBy] = useState('FEATURED');
 
   const categories = [
@@ -38,19 +37,14 @@ export default function ProductGrid({ products, activeCategory, onSelectCategory
           }
         }
 
-        // Price Filter
-        if (priceFilter === 'UNDER_20K' && product.price >= 20000) return false;
-        if (priceFilter === '20K_TO_28K' && (product.price < 20000 || product.price > 28000)) return false;
-        if (priceFilter === 'ABOVE_28K' && product.price <= 28000) return false;
-
         return true;
       })
       .sort((a, b) => {
-        if (sortBy === 'PRICE_ASC') return a.price - b.price;
-        if (sortBy === 'PRICE_DESC') return b.price - a.price;
+        if (sortBy === 'NAME_ASC') return a.title.localeCompare(b.title);
+        if (sortBy === 'NAME_DESC') return b.title.localeCompare(a.title);
         return 0; // Featured default order
       });
-  }, [products, activeCategory, searchQuery, priceFilter, sortBy]);
+  }, [products, activeCategory, searchQuery, sortBy]);
 
   return (
     <section id="catalog-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -109,29 +103,16 @@ export default function ProductGrid({ products, activeCategory, onSelectCategory
           ))}
         </div>
 
-        {/* Budget Brackets & Sorting */}
+        {/* Sorting Dropdown */}
         <div className="flex items-center gap-2">
-          {/* Price Brackets */}
-          <select
-            value={priceFilter}
-            onChange={(e) => setPriceFilter(e.target.value)}
-            className="bg-[#16181c] border border-slate-700/80 text-xs text-slate-200 rounded-xl px-3 py-2 outline-none focus:border-gold-500 cursor-pointer"
-          >
-            <option value="ALL">All Budgets</option>
-            <option value="UNDER_20K">Under ₹20,000</option>
-            <option value="20K_TO_28K">₹20,000 - ₹28,000</option>
-            <option value="ABOVE_28K">Above ₹28,000</option>
-          </select>
-
-          {/* Sort */}
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
             className="bg-[#16181c] border border-slate-700/80 text-xs text-slate-200 rounded-xl px-3 py-2 outline-none focus:border-gold-500 cursor-pointer"
           >
-            <option value="FEATURED">Featured</option>
-            <option value="PRICE_ASC">Price: Low to High</option>
-            <option value="PRICE_DESC">Price: High to Low</option>
+            <option value="FEATURED">Featured Designs</option>
+            <option value="NAME_ASC">Name: A to Z</option>
+            <option value="NAME_DESC">Name: Z to A</option>
           </select>
         </div>
       </div>
@@ -139,15 +120,14 @@ export default function ProductGrid({ products, activeCategory, onSelectCategory
       {/* Active Filter Counter */}
       <div className="text-xs text-slate-400 mb-6 flex items-center justify-between">
         <span>
-          Showing <strong className="text-white">{filteredProducts.length}</strong> items
+          Showing <strong className="text-white">{filteredProducts.length}</strong> designs
           {activeCategory !== 'All' && ` in ${activeCategory}`}
           {searchQuery && ` matching "${searchQuery}"`}
         </span>
-        {(searchQuery || priceFilter !== 'ALL' || activeCategory !== 'All') && (
+        {(searchQuery || activeCategory !== 'All') && (
           <button
             onClick={() => {
               setSearchQuery('');
-              setPriceFilter('ALL');
               onSelectCategory('All');
             }}
             className="text-gold-400 hover:underline"
@@ -176,12 +156,11 @@ export default function ProductGrid({ products, activeCategory, onSelectCategory
           </div>
           <h3 className="text-white font-semibold text-lg mb-2">No matching furniture pieces</h3>
           <p className="text-slate-400 text-xs mb-6">
-            We couldn't find anything matching your filters. You can request a custom design directly on WhatsApp!
+            We couldn't find anything matching your search. Inquire directly on WhatsApp to get custom pricing for your design!
           </p>
           <button
             onClick={() => {
               setSearchQuery('');
-              setPriceFilter('ALL');
               onSelectCategory('All');
             }}
             className="px-5 py-2.5 rounded-xl bg-gold-500 text-charcoal-950 font-bold text-xs"
