@@ -7,9 +7,10 @@ export default function ProductCard({ product, onSelect }) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
 
-  // If local image exists in public/images/products/, try loading it, else fallback to SVG
-  const imageSource = product.image && !imageError
-    ? `./images/products/${product.image}`
+  // Resolve image with Vite BASE_URL for GitHub Pages support
+  const cleanImage = product.image ? product.image.replace(/^\/?(images\/products\/)?/, '') : null;
+  const imageSource = cleanImage && !imageError
+    ? `${import.meta.env.BASE_URL}images/products/${cleanImage}`
     : getCategorySvg(product.category, product.title);
 
   return (

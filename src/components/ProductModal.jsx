@@ -12,8 +12,10 @@ export default function ProductModal({ product, onClose }) {
 
   if (!product) return null;
 
-  const imageSource = product.image && !imageError
-    ? `./images/products/${product.image}`
+  // Resolve image with Vite BASE_URL for GitHub Pages support
+  const cleanImage = product.image ? product.image.replace(/^\/?(images\/products\/)?/, '') : null;
+  const imageSource = cleanImage && !imageError
+    ? `${import.meta.env.BASE_URL}images/products/${cleanImage}`
     : getCategorySvg(product.category, product.title);
 
   const waUrl = generateWhatsAppUrl(product, {
