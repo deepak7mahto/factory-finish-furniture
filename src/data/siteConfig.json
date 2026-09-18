@@ -1,0 +1,35 @@
+{
+  "brandName": "Factory Finish Furniture",
+  "tagline": "Architectural Luxury Furniture • Direct Manufacturer Rates",
+  "location": "Delhi, DL, India",
+  "workshopAddress": "Factory Workshop, Delhi NCR, India",
+  "whatsappNumber": "919871408101",
+  "phoneDisplay": "+91 98714 08101",
+  "warranty": "5 Years Paint & Color Fade Warranty",
+  "shippingNote": "Pan-India Secure Wooden Crated Delivery",
+  "socials": {
+    "facebookMarketplace": "https://www.facebook.com/marketplace/profile/100007985255253/"
+  },
+  "trustPillars": [
+    {
+      "icon": "Factory",
+      "title": "Factory Direct",
+      "desc": "Save 40-50% compared to luxury showrooms by cutting out retail margins."
+    },
+    {
+      "icon": "Sparkles",
+      "title": "Flawless PU Polish",
+      "desc": "Automotive-grade high-gloss or matte PU polish for an ultra-smooth, durable finish."
+    },
+    {
+      "icon": "ShieldCheck",
+      "title": "5-Year Fade Warranty",
+      "desc": "Assured protection against paint fading, chipping, and workmanship defects."
+    },
+    {
+      "icon": "Truck",
+      "title": "Pan-India Delivery",
+      "desc": "Custom wooden crating and transit insurance to ensure safe doorstep arrival anywhere in India."
+    }
+  ]
+}
