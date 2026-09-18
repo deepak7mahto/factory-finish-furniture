@@ -172,7 +172,7 @@ Error generating stack: `+i.message+`
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
- */const Hf=[["path",{d:"M18 6 6 18",key:"1bl5f8"}],["path",{d:"m6 6 12 12",key:"d8bk6v"}]],Io=he("X",Hf),$f="919871408101",Gf="+91 98714 08101",Vf={facebookMarketplace:"https://www.facebook.com/marketplace/profile/100007985255253/"},Kt={whatsappNumber:$f,phoneDisplay:Gf,socials:Vf};function Xu(g,S={}){const p=S.phone||Kt.whatsappNumber,W=S.pincode?S.pincode.trim():"",j=S.notes?S.notes.trim():"",L=S.customDimensions?S.customDimensions.trim():"",M=S.customColor?S.customColor.trim():"";let A=`Hello Factory Finish Furniture,
+ */const Hf=[["path",{d:"M18 6 6 18",key:"1bl5f8"}],["path",{d:"m6 6 12 12",key:"d8bk6v"}]],Io=he("X",Hf),$f="918826236138",Gf="+91 88262 36138",Vf={facebookMarketplace:"https://www.facebook.com/marketplace/profile/100007985255253/"},Kt={whatsappNumber:$f,phoneDisplay:Gf,socials:Vf};function Xu(g,S={}){const p=S.phone||Kt.whatsappNumber,W=S.pincode?S.pincode.trim():"",j=S.notes?S.notes.trim():"",L=S.customDimensions?S.customDimensions.trim():"",M=S.customColor?S.customColor.trim():"";let A=`Hello Factory Finish Furniture,
 
 `;return A+=`I would like to get the direct factory rate and availability for:
 `,A+=`*${g.title}*
