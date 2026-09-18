@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MessageCircle, Eye, Shield, Ruler, Sparkles } from 'lucide-react';
+import { MessageCircle, Eye, Shield, Ruler, Sparkles, ExternalLink } from 'lucide-react';
 import { generateWhatsAppUrl } from '../utils/whatsapp';
 import { getCategorySvg } from '../utils/placeholders';
 
@@ -12,6 +12,8 @@ export default function ProductCard({ product, onSelect }) {
   const imageSource = cleanImage && !imageError
     ? `${import.meta.env.BASE_URL}images/products/${cleanImage}`
     : getCategorySvg(product.category, product.title);
+
+  const photoCount = product.images ? product.images.length : (product.image ? 1 : 0);
 
   return (
     <div className="group bg-[#15171b] border border-slate-800/90 rounded-2xl overflow-hidden hover:border-gold-500/40 hover:shadow-2xl hover:shadow-gold-500/5 transition-all duration-300 flex flex-col justify-between">
@@ -27,7 +29,7 @@ export default function ProductCard({ product, onSelect }) {
             loading="lazy"
           />
 
-          {/* Floating Badges */}
+          {/* Floating Badges (Top-Left) */}
           <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
             {product.badge && (
               <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-gradient-to-r from-gold-600 to-gold-500 text-charcoal-950 shadow-md">
@@ -41,16 +43,39 @@ export default function ProductCard({ product, onSelect }) {
             )}
           </div>
 
-          {/* Value Callout Badge */}
+          {/* Value Callout Badge (Top-Right) */}
           <div className="absolute top-3 right-3 bg-gold-500/90 text-charcoal-950 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shadow-md uppercase tracking-wider">
             Factory Direct
           </div>
 
+          {/* Direct Facebook Marketplace Link (Bottom-Left) */}
+          {product.fbUrl && (
+            <a
+              href={product.fbUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="absolute bottom-3 left-3 bg-[#1877F2]/90 hover:bg-[#1877F2] text-white text-[10px] font-semibold px-2.5 py-1 rounded-lg flex items-center space-x-1 shadow-lg z-10 transition backdrop-blur-sm border border-white/20"
+              title="View on Facebook Marketplace"
+            >
+              <span>FB Listing</span>
+              <ExternalLink className="w-3 h-3" />
+            </a>
+          )}
+
+          {/* Photo Count Badge (Bottom-Right) */}
+          {photoCount > 1 && (
+            <div className="absolute bottom-3 right-3 bg-black/80 backdrop-blur-sm text-slate-200 text-[10px] font-semibold px-2.5 py-1 rounded-lg border border-slate-700/80 flex items-center space-x-1 z-10 shadow-lg">
+              <span>📸</span>
+              <span>{photoCount} Photos</span>
+            </div>
+          )}
+
           {/* Quick view overlay hint */}
-          <div className="absolute inset-0 bg-charcoal-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-            <span className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-slate-900/90 text-white text-xs font-medium border border-gold-500/30">
+          <div className="absolute inset-0 bg-charcoal-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+            <span className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-slate-900/90 text-white text-xs font-medium border border-gold-500/30 shadow-xl">
               <Eye className="w-3.5 h-3.5 text-gold-400" />
-              <span>View Full Specs</span>
+              <span>View Full Gallery &amp; Specs</span>
             </span>
           </div>
         </div>
@@ -111,7 +136,7 @@ export default function ProductCard({ product, onSelect }) {
           className="w-full py-2.5 px-3 rounded-xl bg-slate-800/80 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 text-xs font-medium transition text-center flex items-center justify-center space-x-1"
         >
           <Eye className="w-3.5 h-3.5" />
-          <span>Details</span>
+          <span>Details ({photoCount})</span>
         </button>
 
         <a

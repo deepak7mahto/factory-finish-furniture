@@ -1,5 +1,5 @@
 import React from 'react';
-import { MessageCircle, PhoneCall, PlusCircle, Sparkles, MapPin } from 'lucide-react';
+import { MessageCircle, PhoneCall, PlusCircle, Sparkles, MapPin, ExternalLink } from 'lucide-react';
 import siteConfig from '../data/siteConfig.json';
 import { generateGeneralWhatsAppUrl } from '../utils/whatsapp';
 
@@ -52,6 +52,18 @@ export default function Navbar({ onOpenAdmin, activeCategory, onSelectCategory }
 
           {/* Action Buttons */}
           <div className="flex items-center space-x-2 sm:space-x-4">
+            {/* Facebook Marketplace Profile */}
+            <a
+              href={siteConfig.socials.facebookMarketplace}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden lg:flex items-center space-x-1.5 text-xs font-semibold text-[#4294ff] hover:text-white px-3 py-2 rounded-lg border border-[#1877F2]/40 hover:border-[#1877F2] bg-[#1877F2]/10 hover:bg-[#1877F2]/20 transition"
+              title="View on Facebook Marketplace"
+            >
+              <span>FB Marketplace</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+
             {/* Phone Quick Call */}
             <a
               href={`tel:${siteConfig.phoneDisplay.replace(/\s+/g, '')}`}

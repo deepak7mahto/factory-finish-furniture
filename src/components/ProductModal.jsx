@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, MessageCircle, Ruler, Shield, Sparkles, Box, CheckCircle2, Truck } from 'lucide-react';
+import { X, MessageCircle, Ruler, Shield, Sparkles, Box, CheckCircle2, Truck, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
 import { generateWhatsAppUrl } from '../utils/whatsapp';
 import { getCategorySvg } from '../utils/placeholders';
 
@@ -7,22 +7,31 @@ export default function ProductModal({ product, onClose }) {
   const [pincode, setPincode] = useState('');
   const [customDimensions, setCustomDimensions] = useState('');
   const [customColor, setCustomColor] = useState('');
-  const [notes, setNotes] = useState('');
   const [imageError, setImageError] = useState(false);
+  const [activeImgIdx, setActiveImgIdx] = useState(0);
 
   if (!product) return null;
 
-  // Resolve image with Vite BASE_URL for GitHub Pages support
-  const cleanImage = product.image ? product.image.replace(/^\/?(images\/products\/)?/, '') : null;
-  const imageSource = cleanImage && !imageError
-    ? `${import.meta.env.BASE_URL}images/products/${cleanImage}`
+  // Resolve images with Vite BASE_URL for GitHub Pages support
+  const images = (product.images && product.images.length > 0)
+    ? product.images
+    : (product.image ? [product.image] : []);
+
+  const getImgUrl = (path) => {
+    if (!path) return null;
+    const clean = path.replace(/^\/?(images\/products\/)?/, '');
+    return `${import.meta.env.BASE_URL}images/products/${clean}`;
+  };
+
+  const currentImg = images[activeImgIdx] || product.image;
+  const currentImgUrl = currentImg && !imageError
+    ? getImgUrl(currentImg)
     : getCategorySvg(product.category, product.title);
 
   const waUrl = generateWhatsAppUrl(product, {
     pincode,
     customDimensions,
-    customColor,
-    notes
+    customColor
   });
 
   return (
@@ -42,20 +51,69 @@ export default function ProductModal({ product, onClose }) {
 
         <div className="grid grid-cols-1 md:grid-cols-2">
           
-          {/* Left Column: Image & Badges */}
-          <div className="relative bg-[#1a1d22] aspect-[4/3] md:aspect-auto flex items-center justify-center overflow-hidden border-b md:border-b-0 md:border-r border-slate-800">
-            <img
-              src={imageSource}
-              alt={product.title}
-              onError={() => setImageError(true)}
-              className="w-full h-full object-cover object-center"
-            />
-            {product.badge && (
-              <span className="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-gold-500 text-charcoal-950 shadow-lg">
-                {product.badge}
-              </span>
+          {/* Left Column: Multi-Photo Gallery & Badges */}
+          <div className="flex flex-col bg-[#141619] border-b md:border-b-0 md:border-r border-slate-800">
+            <div className="relative aspect-[4/3] md:aspect-square bg-[#1a1d22] flex items-center justify-center overflow-hidden">
+              <img
+                src={currentImgUrl}
+                alt={`${product.title} - Photo ${activeImgIdx + 1}`}
+                onError={() => setImageError(true)}
+                className="w-full h-full object-cover object-center transition-all duration-300"
+              />
+
+              {/* Photo Counter Pill */}
+              {images.length > 1 && (
+                <span className="absolute top-4 right-14 px-2.5 py-1 rounded-full text-[11px] font-bold bg-black/75 backdrop-blur-md text-white border border-slate-700">
+                  {activeImgIdx + 1} / {images.length} Photos
+                </span>
+              )}
+
+              {/* Prev / Next Arrows */}
+              {images.length > 1 && (
+                <>
+                  <button
+                    onClick={() => setActiveImgIdx((prev) => (prev === 0 ? images.length - 1 : prev - 1))}
+                    className="absolute left-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center backdrop-blur-sm border border-slate-700/80 transition"
+                    title="Previous Photo"
+                  >
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+                  <button
+                    onClick={() => setActiveImgIdx((prev) => (prev === images.length - 1 ? 0 : prev + 1))}
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center backdrop-blur-sm border border-slate-700/80 transition"
+                    title="Next Photo"
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+                </>
+              )}
+
+              {product.badge && (
+                <span className="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-gold-500 text-charcoal-950 shadow-lg">
+                  {product.badge}
+                </span>
+              )}
+            </div>
+
+            {/* Thumbnail Strip */}
+            {images.length > 1 && (
+              <div className="p-3 bg-[#111316] border-t border-slate-800/80 flex items-center space-x-2 overflow-x-auto scrollbar-none">
+                {images.map((img, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveImgIdx(idx)}
+                    className={`w-14 h-14 rounded-lg overflow-hidden shrink-0 border-2 transition ${
+                      activeImgIdx === idx ? 'border-gold-400 scale-105' : 'border-slate-800 opacity-60 hover:opacity-100'
+                    }`}
+                  >
+                    <img src={getImgUrl(img)} alt="" className="w-full h-full object-cover" />
+                  </button>
+                ))}
+              </div>
             )}
-            <div className="absolute bottom-4 left-4 right-4 bg-slate-950/80 backdrop-blur-md rounded-xl p-3 border border-slate-800 flex items-center justify-between text-xs text-slate-300">
+
+            {/* Bottom Trust bar */}
+            <div className="p-3 bg-slate-950/80 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-300">
               <span className="flex items-center space-x-1.5 text-emerald-400 font-semibold">
                 <Shield className="w-4 h-4" />
                 <span>5-Year Finish Warranty</span>
@@ -98,6 +156,18 @@ export default function ProductModal({ product, onClose }) {
                 </span>
               </div>
 
+              {/* Authentic Facebook Description */}
+              {product.description && (
+                <div className="mt-5 p-4 rounded-2xl bg-[#111316] border border-slate-800/90 text-xs text-slate-300">
+                  <span className="text-[11px] font-semibold text-gold-400/90 uppercase tracking-wider block mb-2">
+                    Craftsmanship &amp; Details:
+                  </span>
+                  <div className="whitespace-pre-line leading-relaxed font-sans text-slate-300">
+                    {product.description}
+                  </div>
+                </div>
+              )}
+
               {/* Specifications Matrix */}
               <div className="mt-5 space-y-2.5 text-xs">
                 <div className="flex items-start justify-between py-1.5 border-b border-slate-800">
@@ -119,38 +189,17 @@ export default function ProductModal({ product, onClose }) {
                 <div className="flex items-start justify-between py-1.5 border-b border-slate-800">
                   <span className="text-slate-400 flex items-center space-x-1.5">
                     <Sparkles className="w-3.5 h-3.5 text-gold-400" />
-                    <span>Finish:</span>
+                    <span>PU Polish / Finish:</span>
                   </span>
                   <span className="text-white font-medium text-right max-w-[60%]">{product.finish}</span>
                 </div>
-
-                {product.color && (
-                  <div className="flex items-start justify-between py-1.5 border-b border-slate-800">
-                    <span className="text-slate-400">Color / Accent:</span>
-                    <span className="text-white font-medium text-right">{product.color}</span>
-                  </div>
-                )}
-
-                {product.storage && (
-                  <div className="flex items-start justify-between py-1.5 border-b border-slate-800">
-                    <span className="text-slate-400">Storage Config:</span>
-                    <span className="text-white font-medium text-right max-w-[60%]">{product.storage}</span>
-                  </div>
-                )}
-
-                {product.hardware && (
-                  <div className="flex items-start justify-between py-1.5 border-b border-slate-800">
-                    <span className="text-slate-400">Hardware:</span>
-                    <span className="text-white font-medium text-right max-w-[60%]">{product.hardware}</span>
-                  </div>
-                )}
               </div>
 
-              {/* Key Features Bullet List */}
+              {/* Highlights */}
               {product.features && product.features.length > 0 && (
                 <div className="mt-4">
                   <span className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider block mb-2">
-                    Highlights:
+                    Key Highlights:
                   </span>
                   <ul className="space-y-1 text-xs text-slate-300">
                     {product.features.map((feat, idx) => (
@@ -196,8 +245,8 @@ export default function ProductModal({ product, onClose }) {
               </div>
             </div>
 
-            {/* Modal Bottom CTA */}
-            <div className="mt-6 pt-4 border-t border-slate-800">
+            {/* Modal Bottom CTAs */}
+            <div className="mt-6 pt-4 border-t border-slate-800 space-y-2">
               <a
                 href={waUrl}
                 target="_blank"
@@ -207,6 +256,20 @@ export default function ProductModal({ product, onClose }) {
                 <MessageCircle className="w-5 h-5 fill-white text-transparent" />
                 <span>Get Factory Rate Quote on WhatsApp</span>
               </a>
+
+              {/* Direct Facebook Marketplace Link */}
+              {product.fbUrl && (
+                <a
+                  href={product.fbUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-2.5 px-4 rounded-xl bg-[#1877F2]/15 hover:bg-[#1877F2]/25 text-[#4294ff] hover:text-white border border-[#1877F2]/40 font-semibold text-xs transition flex items-center justify-center space-x-2"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  <span>View Original Facebook Marketplace Listing</span>
+                </a>
+              )}
+
               <p className="text-center text-[11px] text-slate-500 mt-2">
                 Replies typically within 1 hour • Workshop visits by appointment in Delhi
               </p>
