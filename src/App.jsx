@@ -62,7 +62,7 @@ export default function App() {
 
       {/* Main Content Area */}
       <main className="flex-1">
-        <Hero onExploreClick={handleExploreClick} />
+        <Hero onExploreClick={handleExploreClick} productCount={products.length} />
 
         <ProductGrid
           products={products}

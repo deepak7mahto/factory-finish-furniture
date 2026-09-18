@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, MessageCircle, Ruler, Shield, Sparkles, Box, CheckCircle2, Truck, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
+import { X, MessageCircle, Ruler, Shield, Sparkles, Box, CheckCircle2, Truck, ChevronLeft, ChevronRight } from 'lucide-react';
 import { generateWhatsAppUrl } from '../utils/whatsapp';
 import { getCategorySvg } from '../utils/placeholders';
 
@@ -256,19 +256,6 @@ export default function ProductModal({ product, onClose }) {
                 <MessageCircle className="w-5 h-5 fill-white text-transparent" />
                 <span>Get Factory Rate Quote on WhatsApp</span>
               </a>
-
-              {/* Direct Facebook Marketplace Link */}
-              {product.fbUrl && (
-                <a
-                  href={product.fbUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-2.5 px-4 rounded-xl bg-[#1877F2]/15 hover:bg-[#1877F2]/25 text-[#4294ff] hover:text-white border border-[#1877F2]/40 font-semibold text-xs transition flex items-center justify-center space-x-2"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                  <span>View Original Facebook Marketplace Listing</span>
-                </a>
-              )}
 
               <p className="text-center text-[11px] text-slate-500 mt-2">
                 Replies typically within 1 hour • Workshop visits by appointment in Delhi

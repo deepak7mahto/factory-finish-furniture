@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MessageCircle, Eye, Shield, Ruler, Sparkles, ExternalLink } from 'lucide-react';
+import { MessageCircle, Eye, Shield, Ruler, Sparkles } from 'lucide-react';
 import { generateWhatsAppUrl } from '../utils/whatsapp';
 import { getCategorySvg } from '../utils/placeholders';
 
@@ -46,21 +46,6 @@ export default function ProductCard({ product, onSelect }) {
           <div className="absolute top-3 right-3 bg-gold-500/90 text-charcoal-950 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shadow-md uppercase tracking-wider">
             Factory Direct
           </div>
-
-          {/* Direct Facebook Marketplace Link (Bottom-Left) */}
-          {product.fbUrl && (
-            <a
-              href={product.fbUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="absolute bottom-3 left-3 bg-[#1877F2]/90 hover:bg-[#1877F2] text-white text-[10px] font-semibold px-2.5 py-1 rounded-lg flex items-center space-x-1 shadow-lg z-10 transition backdrop-blur-sm border border-white/20"
-              title="View on Facebook Marketplace"
-            >
-              <span>FB Listing</span>
-              <ExternalLink className="w-3 h-3" />
-            </a>
-          )}
 
           {/* Photo Count Badge (Bottom-Right) */}
           {photoCount > 1 && (

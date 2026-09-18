@@ -3,7 +3,7 @@ import { Factory, Sparkles, ShieldCheck, Truck, ArrowRight, MessageCircle } from
 import siteConfig from '../data/siteConfig.json';
 import { generateGeneralWhatsAppUrl } from '../utils/whatsapp';
 
-export default function Hero({ onExploreClick }) {
+export default function Hero({ onExploreClick, productCount = 28 }) {
   return (
     <section className="relative overflow-hidden pt-12 pb-16 md:pt-20 md:pb-24 bg-gradient-to-b from-[#121417] via-[#101215] to-[#0f1114]">
       {/* Subtle Background Glow Elements */}
@@ -36,7 +36,7 @@ export default function Hero({ onExploreClick }) {
               onClick={onExploreClick}
               className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-gradient-to-r from-gold-600 to-gold-500 hover:from-gold-500 hover:to-gold-400 text-charcoal-950 font-bold text-sm shadow-xl shadow-gold-500/20 flex items-center justify-center space-x-2 transition transform hover:-translate-y-0.5"
             >
-              <span>Explore 22 Verified Designs</span>
+              <span>Explore {productCount} Verified Designs</span>
               <ArrowRight className="w-4 h-4" />
             </button>
             <a

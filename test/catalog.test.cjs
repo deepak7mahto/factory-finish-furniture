@@ -10,20 +10,20 @@ const configPath = path.join(__dirname, '../src/data/siteConfig.json');
 const products = JSON.parse(fs.readFileSync(productsPath, 'utf8'));
 const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
 
-// Test 1: Count of products (22 unique listings from Facebook Marketplace)
-assert.strictEqual(products.length, 22, 'Catalog must contain exactly 22 unique products');
-console.log('✓ 22 Unique products verified');
+// Test 1: Count of products (28 unique listings exclusively from Manish Prasad Facebook Marketplace)
+assert.strictEqual(products.length, 28, 'Catalog must contain exactly 28 unique products from Manish Prasad');
+console.log('✓ 28 Unique Manish Prasad products verified');
 
 // Test 2: Unique IDs, unique images, and unique FB IDs
 const ids = new Set(products.map(p => p.id));
-assert.strictEqual(ids.size, 22, 'All product IDs must be unique');
+assert.strictEqual(ids.size, 28, 'All product IDs must be unique');
 
 const fbIds = new Set(products.map(p => p.fbId).filter(Boolean));
-assert.strictEqual(fbIds.size, 22, 'All FB IDs must be unique (no repeated Facebook listings)');
+assert.strictEqual(fbIds.size, 28, 'All FB IDs must be unique (no repeated Facebook listings)');
 
 const images = new Set(products.map(p => p.image).filter(Boolean));
-assert.strictEqual(images.size, 22, 'All product cover images must be unique (no repeated photos)');
-console.log('✓ Zero duplicate items or photos verified');
+assert.strictEqual(images.size, 28, 'All product cover images must be unique (no repeated photos)');
+console.log('✓ Zero duplicate items or photos verified across all 28 Manish listings');
 
 // Test 3: Essential fields on every product
 products.forEach((p, idx) => {
