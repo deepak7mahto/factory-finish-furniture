@@ -55,7 +55,7 @@ export default function ProductGrid({ products, activeCategory, onSelectCategory
           <div className="flex items-center space-x-2 text-gold-400 text-xs font-semibold uppercase tracking-wider mb-2">
             <span>Direct Manufacturer Catalog</span>
             <span>•</span>
-            <span>28 Verified Designs</span>
+            <span>{products.length} Verified Unique Designs</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
             Explore Factory Finish Collections
@@ -165,7 +165,7 @@ export default function ProductGrid({ products, activeCategory, onSelectCategory
             }}
             className="px-5 py-2.5 rounded-xl bg-gold-500 text-charcoal-950 font-bold text-xs"
           >
-            Show All 28 Designs
+            Show All {products.length} Designs
           </button>
         </div>
       )}

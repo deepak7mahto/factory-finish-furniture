@@ -36,7 +36,7 @@ export default function Hero({ onExploreClick }) {
               onClick={onExploreClick}
               className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-gradient-to-r from-gold-600 to-gold-500 hover:from-gold-500 hover:to-gold-400 text-charcoal-950 font-bold text-sm shadow-xl shadow-gold-500/20 flex items-center justify-center space-x-2 transition transform hover:-translate-y-0.5"
             >
-              <span>Explore 28+ Active Designs</span>
+              <span>Explore 22 Verified Designs</span>
               <ArrowRight className="w-4 h-4" />
             </button>
             <a
