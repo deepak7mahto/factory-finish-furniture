@@ -26,7 +26,6 @@ export default function ProductCard({ product, onSelect }) {
             onError={() => setImageError(true)}
             onLoad={() => setImageLoaded(true)}
             className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-            loading="lazy"
           />
 
           {/* Floating Badges (Top-Left) */}
