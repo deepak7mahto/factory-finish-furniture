@@ -68,10 +68,10 @@ export default function AdminImporter({ isOpen, onClose, onAddProductToCatalog, 
             </div>
             <div>
               <h3 className="text-white font-bold text-base sm:text-lg">
-                Facebook Marketplace "Paste &amp; Parse" Tool
+                Quick Listing "Paste &amp; Parse" Tool
               </h3>
               <p className="text-slate-400 text-xs">
-                Paste listing text from Facebook to auto-extract fields and add to catalog
+                Paste listing text to auto-extract specifications and add to catalog
               </p>
             </div>
           </div>
@@ -86,7 +86,7 @@ export default function AdminImporter({ isOpen, onClose, onAddProductToCatalog, 
         {/* Input Box */}
         <div className="mt-6">
           <label className="text-xs font-semibold text-slate-300 block mb-2">
-            Paste Facebook Marketplace Listing Details:
+            Paste Listing Details:
           </label>
           <textarea
             rows="5"

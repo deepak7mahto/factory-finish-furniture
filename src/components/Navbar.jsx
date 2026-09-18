@@ -66,7 +66,7 @@ export default function Navbar({ onOpenAdmin, activeCategory, onSelectCategory }
             <button
               onClick={onOpenAdmin}
               className="flex items-center space-x-1.5 text-xs text-slate-300 hover:text-gold-300 px-3 py-2 rounded-lg bg-slate-800/60 hover:bg-slate-800 border border-slate-700/80 transition"
-              title="Paste FB Marketplace listing"
+              title="Add Listing"
             >
               <PlusCircle className="w-4 h-4 text-gold-400" />
               <span className="hidden md:inline">Add Listing</span>
