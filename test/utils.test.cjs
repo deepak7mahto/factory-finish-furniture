@@ -38,7 +38,7 @@ function parseMarketplaceText(text) {
   };
 }
 
-function generateWhatsAppUrl(product, { phone = '919871408101', pincode = '', notes = '' } = {}) {
+function generateWhatsAppUrl(product, { phone = '918826236138', pincode = '', notes = '' } = {}) {
   let msg = `Hello Factory Finish Furniture,\n\n`;
   msg += `I would like to get the direct factory rate and availability for:\n`;
   msg += `*${product.title}*\n`;
@@ -62,7 +62,7 @@ console.log('✓ parseMarketplaceText passed');
 // Test 2: WhatsApp URL without price
 const testProduct = { id: 'fff-001', title: 'Fluted Sideboard', size: '5 × 3 Feet' };
 const waUrl = generateWhatsAppUrl(testProduct, { pincode: '110001' });
-assert(waUrl.startsWith('https://wa.me/919871408101?text='));
+assert(waUrl.startsWith('https://wa.me/918826236138?text='));
 assert(waUrl.includes(encodeURIComponent('Fluted Sideboard')));
 assert(waUrl.includes(encodeURIComponent('110001')));
 assert(waUrl.includes(encodeURIComponent('factory rate and availability')));
