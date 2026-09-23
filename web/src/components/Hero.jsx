@@ -4,10 +4,10 @@ import siteConfig from '../data/siteConfig.json';
 import { generateGeneralWhatsAppUrl } from '../utils/whatsapp';
 
 const iconMap = {
-  0: { icon: Factory, color: 'text-gold-400', bg: 'bg-gold-500/10 border-gold-500/20' },
-  1: { icon: Sparkles, color: 'text-amber-400', bg: 'bg-amber-500/10 border-amber-500/20' },
-  2: { icon: ShieldCheck, color: 'text-emerald-400', bg: 'bg-emerald-500/10 border-emerald-500/20' },
-  3: { icon: Truck, color: 'text-blue-400', bg: 'bg-blue-500/10 border-blue-500/20' },
+  0: { icon: Factory, color: 'text-gold-700', bg: 'bg-gold-50 border-gold-200' },
+  1: { icon: Sparkles, color: 'text-amber-700', bg: 'bg-amber-50 border-amber-200' },
+  2: { icon: ShieldCheck, color: 'text-emerald-700', bg: 'bg-emerald-50 border-emerald-200' },
+  3: { icon: Truck, color: 'text-sky-700', bg: 'bg-sky-50 border-sky-200' },
 };
 
 export default function Hero({ onExploreClick, productCount = 28, siteSettings }) {
@@ -33,28 +33,28 @@ export default function Hero({ onExploreClick, productCount = 28, siteSettings }
         },
       ];
   return (
-    <section className="relative overflow-hidden pt-12 pb-16 md:pt-20 md:pb-24 bg-gradient-to-b from-[#121417] via-[#101215] to-[#0f1114]">
-      {/* Subtle Background Glow Elements */}
-      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-96 md:w-[650px] h-80 bg-gold-500/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -top-24 right-10 w-72 h-72 bg-amber-600/10 rounded-full blur-3xl pointer-events-none" />
+    <section className="relative overflow-hidden pt-12 pb-16 md:pt-20 md:pb-24 bg-gradient-to-b from-stoneWarm-100 via-stoneWarm-50 to-stoneWarm-50">
+      {/* Subtle Warm Background Glow */}
+      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-96 md:w-[650px] h-80 bg-gold-200/40 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -top-24 right-10 w-72 h-72 bg-amber-100/60 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto">
           
           {/* Badge */}
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-400 text-xs font-semibold uppercase tracking-widest mb-6">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Direct from Delhi Workshop • Zero Retail Markup</span>
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-gold-50 border border-gold-300 text-gold-800 text-xs font-bold uppercase tracking-widest mb-6 shadow-sm">
+            <Sparkles className="w-3.5 h-3.5 text-gold-600" />
+            <span>Direct from Delhi Workshop • Zero Showroom Markup</span>
           </div>
 
           {/* Main Title */}
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-tight md:leading-none mb-6">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-stoneWarm-900 font-display tracking-tight leading-tight md:leading-none mb-6">
             Architectural Luxury, <br />
-            <span className="gold-gradient-text font-luxury">Direct Factory Rates</span>
+            <span className="gold-gradient-text font-display">Direct Factory Rates</span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-slate-300 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed mb-8">
+          <p className="text-stoneWarm-600 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed mb-8 font-normal">
             Experience high-end fluted sideboards, center glass showcases, LED touch dressers, and designer wardrobes. Handcrafted in our Delhi factory with multi-coat PU polish, premium HDMR, and a 5-year finish warranty.
           </p>
 
@@ -62,7 +62,7 @@ export default function Hero({ onExploreClick, productCount = 28, siteSettings }
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
             <button
               onClick={onExploreClick}
-              className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-gradient-to-r from-gold-600 to-gold-500 hover:from-gold-500 hover:to-gold-400 text-charcoal-950 font-bold text-sm shadow-xl shadow-gold-500/20 flex items-center justify-center space-x-2 transition transform hover:-translate-y-0.5"
+              className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-stoneWarm-900 hover:bg-stoneWarm-800 text-white font-bold text-sm shadow-lg shadow-stoneWarm-900/15 flex items-center justify-center space-x-2 transition transform hover:-translate-y-0.5"
             >
               <span>Explore {productCount} Verified Designs</span>
               <ArrowRight className="w-4 h-4" />
@@ -71,29 +71,29 @@ export default function Hero({ onExploreClick, productCount = 28, siteSettings }
               href={generateGeneralWhatsAppUrl('Custom Size & Color Consultation')}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-slate-800/80 hover:bg-slate-800 text-slate-200 hover:text-white border border-slate-700 font-semibold text-sm flex items-center justify-center space-x-2 transition"
+              className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-white hover:bg-stoneWarm-100 text-stoneWarm-800 border border-stoneWarm-300 font-bold text-sm shadow-sm flex items-center justify-center space-x-2 transition transform hover:-translate-y-0.5"
             >
-              <MessageCircle className="w-4 h-4 text-[#25D366]" />
+              <MessageCircle className="w-4 h-4 text-[#16A34A]" />
               <span>Request Custom Size / Quote</span>
             </a>
           </div>
         </div>
 
         {/* Trust Pillars */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 pt-6 border-t border-slate-800/80">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 pt-6 border-t border-stoneWarm-200">
           {pillars.map((pillar, idx) => {
             const style = iconMap[idx % 4];
             const IconComponent = style.icon;
             return (
               <div
                 key={pillar.title || idx}
-                className="bg-[#16191d]/80 border border-slate-800/80 rounded-2xl p-5 hover:border-gold-500/30 transition-colors"
+                className="bg-white border border-stoneWarm-200 rounded-2xl p-5 shadow-warm-card hover:border-gold-300 hover:shadow-warm-hover transition-all"
               >
-                <div className={`w-10 h-10 rounded-xl ${style.bg} border flex items-center justify-center mb-3`}>
+                <div className={`w-10 h-10 rounded-xl ${style.bg} border flex items-center justify-center mb-3 shadow-xs`}>
                   <IconComponent className={`w-5 h-5 ${style.color}`} />
                 </div>
-                <h3 className="text-white font-semibold text-sm mb-1">{pillar.title}</h3>
-                <p className="text-slate-400 text-xs leading-relaxed">
+                <h3 className="text-stoneWarm-900 font-bold text-sm mb-1.5">{pillar.title}</h3>
+                <p className="text-stoneWarm-600 text-xs leading-relaxed font-normal">
                   {pillar.description || pillar.desc}
                 </p>
               </div>

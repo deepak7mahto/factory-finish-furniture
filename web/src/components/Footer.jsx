@@ -23,41 +23,41 @@ export default function Footer({ onOpenAdmin, siteSettings, blogPosts }) {
     : defaultBlogs;
 
   return (
-    <footer className="bg-[#0c0e11] border-t border-slate-800 text-slate-400 text-xs">
+    <footer className="bg-stoneWarm-900 border-t border-stoneWarm-800 text-stoneWarm-300 text-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
           
           {/* Col 1: Brand */}
           <div>
             <div className="flex items-center space-x-2 mb-3">
-              <span className="text-xl font-bold tracking-widest text-white font-luxury">
+              <span className="text-xl font-bold tracking-widest text-white font-display">
                 {brandName.toUpperCase()}
               </span>
             </div>
-            <p className="text-slate-400 text-xs leading-relaxed mb-4">
+            <p className="text-stoneWarm-300 text-xs leading-relaxed mb-4 font-normal">
               {tagline}. High-end fluted sideboards, center glass showcases, and custom wardrobes with 5-year finish warranty.
             </p>
-            <div className="flex items-center space-x-2 text-emerald-400 text-xs">
-              <ShieldCheck className="w-4 h-4" />
+            <div className="flex items-center space-x-2 text-emerald-400 text-xs font-medium">
+              <ShieldCheck className="w-4 h-4 text-emerald-400" />
               <span>{warranty}</span>
             </div>
           </div>
 
           {/* Col 2: Design Guides */}
           <div>
-            <h4 className="text-white font-semibold uppercase tracking-wider text-xs mb-3">
+            <h4 className="text-white font-bold uppercase tracking-wider text-xs mb-3.5">
               Design Guides
             </h4>
             <ul className="space-y-2 text-xs">
               {guides.map((g) => (
                 <li key={g.slug}>
-                  <a href={`/blog/${g.slug}/`} className="text-slate-400 hover:text-gold-400 transition">
+                  <a href={`/blog/${g.slug}/`} className="text-stoneWarm-300 hover:text-gold-300 transition font-normal">
                     {g.title}
                   </a>
                 </li>
               ))}
               <li>
-                <a href="/blog/" className="text-gold-400 hover:underline pt-1 inline-block font-medium">
+                <a href="/blog/" className="text-gold-400 hover:underline pt-1 inline-block font-semibold">
                   View All Guides →
                 </a>
               </li>
@@ -66,27 +66,27 @@ export default function Footer({ onOpenAdmin, siteSettings, blogPosts }) {
 
           {/* Col 3: Direct Contact */}
           <div>
-            <h4 className="text-white font-semibold uppercase tracking-wider text-xs mb-3">
+            <h4 className="text-white font-bold uppercase tracking-wider text-xs mb-3.5">
               Direct Contact
             </h4>
-            <ul className="space-y-2 text-xs">
-              <li className="flex items-center space-x-2">
+            <ul className="space-y-2.5 text-xs">
+              <li className="flex items-center space-x-2 text-stoneWarm-300">
                 <MapPin className="w-3.5 h-3.5 text-gold-400 shrink-0" />
                 <span>{location}</span>
               </li>
               <li className="flex items-center space-x-2">
                 <Phone className="w-3.5 h-3.5 text-gold-400 shrink-0" />
-                <a href={`tel:${phoneDisplay.replace(/\s+/g, '')}`} className="hover:text-white transition">
+                <a href={`tel:${phoneDisplay.replace(/\s+/g, '')}`} className="text-stoneWarm-300 hover:text-white transition">
                   {phoneDisplay}
                 </a>
               </li>
               <li className="flex items-center space-x-2">
-                <MessageCircle className="w-3.5 h-3.5 text-[#25D366] shrink-0" />
+                <MessageCircle className="w-3.5 h-3.5 text-[#16A34A] shrink-0" />
                 <a
                   href={generateGeneralWhatsAppUrl('Footer Inquiry')}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[#25D366] transition"
+                  className="text-stoneWarm-300 hover:text-[#16A34A] transition font-medium"
                 >
                   WhatsApp: +{whatsappNumber}
                 </a>
@@ -96,29 +96,29 @@ export default function Footer({ onOpenAdmin, siteSettings, blogPosts }) {
 
           {/* Col 3: Workshop Direct & Quality */}
           <div>
-            <h4 className="text-white font-semibold uppercase tracking-wider text-xs mb-3">
+            <h4 className="text-white font-bold uppercase tracking-wider text-xs mb-3.5">
               Workshop Direct
             </h4>
             <ul className="space-y-2.5 text-xs">
               <li>
-                <span className="text-slate-300">
+                <span className="text-stoneWarm-200 font-medium">
                   Direct Factory Wholesale Pricing
                 </span>
               </li>
               <li>
-                <span className="text-slate-400">
+                <span className="text-stoneWarm-300">
                   Custom Sizing &amp; PU Polish Colors
                 </span>
               </li>
               <li>
                 <button
                   onClick={onOpenAdmin}
-                  className="text-slate-500 hover:text-slate-300 transition underline underline-offset-2 text-[11px]"
+                  className="text-gold-400 hover:text-gold-300 transition underline underline-offset-2 text-xs font-medium"
                 >
                   Admin: Import Listing
                 </button>
               </li>
-              <li className="text-slate-500 pt-2 text-[11px]">
+              <li className="text-stoneWarm-400 pt-2 text-xs">
                 Pan-India Safe Wooden Crating &amp; Transit Insurance
               </li>
             </ul>
@@ -127,7 +127,7 @@ export default function Footer({ onOpenAdmin, siteSettings, blogPosts }) {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500 gap-4">
+        <div className="pt-8 border-t border-stoneWarm-800 flex flex-col sm:flex-row items-center justify-between text-xs text-stoneWarm-400 gap-4">
           <p>© {new Date().getFullYear()} Factory Finish Furniture. All rights reserved.</p>
           <p className="flex items-center space-x-1">
             <span>Handcrafted with precision in Delhi, India</span>

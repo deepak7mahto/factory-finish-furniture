@@ -50,32 +50,32 @@ export default function ProductGrid({ products, activeCategory, onSelectCategory
     <section id="catalog-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       
       {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-6 border-b border-slate-800/80 gap-4">
+      <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-6 border-b border-stoneWarm-200 gap-4">
         <div>
-          <div className="flex items-center space-x-2 text-gold-400 text-xs font-semibold uppercase tracking-wider mb-2">
+          <div className="flex items-center space-x-2 text-gold-700 text-xs font-bold uppercase tracking-wider mb-2">
             <span>Direct Manufacturer Catalog</span>
             <span>•</span>
             <span>{products.length} Verified Unique Designs</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-bold text-stoneWarm-900 font-display tracking-tight">
             Explore Factory Finish Collections
           </h2>
         </div>
 
         {/* Search Bar */}
         <div className="relative w-full md:w-80">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stoneWarm-500" />
           <input
             type="text"
             placeholder="Search fluted, LED, marble, glass..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-[#16181c] border border-slate-700/80 focus:border-gold-500 focus:ring-1 focus:ring-gold-500 rounded-xl pl-10 pr-10 py-2.5 text-xs text-white placeholder-slate-400 outline-none transition"
+            className="w-full bg-white border border-stoneWarm-300 focus:border-gold-500 focus:ring-1 focus:ring-gold-500 rounded-xl pl-10 pr-10 py-2.5 text-xs text-stoneWarm-900 placeholder-stoneWarm-400 outline-none transition shadow-xs"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-stoneWarm-400 hover:text-stoneWarm-800"
             >
               <X className="w-4 h-4" />
             </button>
@@ -92,10 +92,10 @@ export default function ProductGrid({ products, activeCategory, onSelectCategory
             <button
               key={cat}
               onClick={() => onSelectCategory(cat)}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-colors ${
+              className={`px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-colors ${
                 activeCategory === cat
-                  ? 'bg-gold-500 text-charcoal-950 font-bold shadow-sm'
-                  : 'bg-slate-900/90 text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-800'
+                  ? 'bg-stoneWarm-900 text-white shadow-xs'
+                  : 'bg-white text-stoneWarm-700 hover:text-stoneWarm-950 hover:bg-stoneWarm-100 border border-stoneWarm-300'
               }`}
             >
               {cat}
@@ -108,7 +108,7 @@ export default function ProductGrid({ products, activeCategory, onSelectCategory
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="bg-[#16181c] border border-slate-700/80 text-xs text-slate-200 rounded-xl px-3 py-2 outline-none focus:border-gold-500 cursor-pointer"
+            className="bg-white border border-stoneWarm-300 text-xs text-stoneWarm-800 font-medium rounded-xl px-3 py-2 outline-none focus:border-gold-500 cursor-pointer shadow-xs"
           >
             <option value="FEATURED">Featured Designs</option>
             <option value="NAME_ASC">Name: A to Z</option>
@@ -118,9 +118,9 @@ export default function ProductGrid({ products, activeCategory, onSelectCategory
       </div>
 
       {/* Active Filter Counter */}
-      <div className="text-xs text-slate-400 mb-6 flex items-center justify-between">
+      <div className="text-xs text-stoneWarm-600 mb-6 flex items-center justify-between">
         <span>
-          Showing <strong className="text-white">{filteredProducts.length}</strong> designs
+          Showing <strong className="text-stoneWarm-900 font-bold">{filteredProducts.length}</strong> designs
           {activeCategory !== 'All' && ` in ${activeCategory}`}
           {searchQuery && ` matching "${searchQuery}"`}
         </span>
@@ -130,7 +130,7 @@ export default function ProductGrid({ products, activeCategory, onSelectCategory
               setSearchQuery('');
               onSelectCategory('All');
             }}
-            className="text-gold-400 hover:underline"
+            className="text-gold-700 font-semibold hover:underline"
           >
             Reset all filters
           </button>
@@ -151,12 +151,12 @@ export default function ProductGrid({ products, activeCategory, onSelectCategory
         </div>
       ) : (
         /* Empty State */
-        <div className="text-center py-20 bg-[#141619] border border-slate-800 rounded-2xl p-8 max-w-lg mx-auto">
-          <div className="w-12 h-12 rounded-full bg-slate-800/80 flex items-center justify-center mx-auto mb-4 text-slate-400">
+        <div className="text-center py-20 bg-white border border-stoneWarm-200 rounded-2xl p-8 max-w-lg mx-auto shadow-warm-card">
+          <div className="w-12 h-12 rounded-full bg-stoneWarm-100 flex items-center justify-center mx-auto mb-4 text-stoneWarm-600">
             <Search className="w-6 h-6" />
           </div>
-          <h3 className="text-white font-semibold text-lg mb-2">No matching furniture pieces</h3>
-          <p className="text-slate-400 text-xs mb-6">
+          <h3 className="text-stoneWarm-900 font-bold text-lg mb-2">No matching furniture pieces</h3>
+          <p className="text-stoneWarm-600 text-xs mb-6 leading-relaxed">
             We couldn't find anything matching your search. Inquire directly on WhatsApp to get custom pricing for your design!
           </p>
           <button
@@ -164,7 +164,7 @@ export default function ProductGrid({ products, activeCategory, onSelectCategory
               setSearchQuery('');
               onSelectCategory('All');
             }}
-            className="px-5 py-2.5 rounded-xl bg-gold-500 text-charcoal-950 font-bold text-xs"
+            className="px-5 py-2.5 rounded-xl bg-stoneWarm-900 hover:bg-stoneWarm-800 text-white font-bold text-xs shadow-sm"
           >
             Show All {products.length} Designs
           </button>

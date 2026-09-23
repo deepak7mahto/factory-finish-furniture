@@ -80,7 +80,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0f1114] flex flex-col justify-between selection:bg-gold-500 selection:text-charcoal-950">
+    <div className="min-h-screen bg-stoneWarm-50 text-stoneWarm-900 flex flex-col justify-between selection:bg-gold-500 selection:text-white">
       
       {/* Navigation Header */}
       <Navbar

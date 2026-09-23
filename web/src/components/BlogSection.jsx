@@ -40,20 +40,20 @@ export default function BlogSection({ blogPosts }) {
   const posts = blogPosts && blogPosts.length > 0 ? blogPosts : fallbackGuides;
 
   return (
-    <section id="guides-section" className="py-16 md:py-24 bg-[#0d0f12] border-t border-slate-800/80 relative">
+    <section id="guides-section" className="py-16 md:py-24 bg-stoneWarm-100 border-t border-stoneWarm-200 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
           <div>
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-400 text-xs font-semibold uppercase tracking-wider mb-3">
-              <Sparkles className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-gold-50 border border-gold-300 text-gold-800 text-xs font-bold uppercase tracking-wider mb-3 shadow-xs">
+              <Sparkles className="w-3.5 h-3.5 text-gold-600" />
               <span>Workshop Knowledge Base</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight">
-              Design Guides &amp; <span className="gold-gradient-text font-luxury">Buying Insights</span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-stoneWarm-900 font-display tracking-tight">
+              Design Guides &amp; <span className="gold-gradient-text font-display">Buying Insights</span>
             </h2>
-            <p className="mt-2 text-slate-400 text-xs sm:text-sm max-w-2xl leading-relaxed">
+            <p className="mt-2 text-stoneWarm-600 text-xs sm:text-sm max-w-2xl leading-relaxed font-normal">
               Factory-direct advice on luxury PU finishes, custom fluted carpentry, vastu guidelines, and space planning direct from our Delhi master craftsmen.
             </p>
           </div>
@@ -61,7 +61,7 @@ export default function BlogSection({ blogPosts }) {
           <div className="mt-6 md:mt-0">
             <a
               href="/blog/"
-              className="inline-flex items-center space-x-2 text-xs sm:text-sm font-semibold text-gold-400 hover:text-gold-300 transition group"
+              className="inline-flex items-center space-x-2 text-xs sm:text-sm font-bold text-stoneWarm-800 hover:text-gold-700 transition group"
             >
               <span>Explore All Guides</span>
               <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
@@ -74,10 +74,10 @@ export default function BlogSection({ blogPosts }) {
           {posts.slice(0, 4).map((post) => (
             <article
               key={post.slug || post._id}
-              className="bg-[#14171c] border border-slate-800 rounded-2xl overflow-hidden hover:border-gold-500/40 transition-all duration-300 flex flex-col group hover:-translate-y-1 shadow-lg"
+              className="bg-white border border-stoneWarm-200 rounded-2xl overflow-hidden hover:border-gold-400 transition-all duration-300 flex flex-col group hover:-translate-y-1 shadow-warm-card hover:shadow-warm-hover"
             >
               {/* Cover Image */}
-              <a href={`/blog/${post.slug}/`} className="relative block aspect-[16/10] overflow-hidden bg-slate-900">
+              <a href={`/blog/${post.slug}/`} className="relative block aspect-[16/10] overflow-hidden bg-stoneWarm-100">
                 {post.coverUrl ? (
                   <img
                     src={post.coverUrl}
@@ -86,12 +86,12 @@ export default function BlogSection({ blogPosts }) {
                     loading="lazy"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-slate-800 text-slate-500">
-                    <BookOpen className="w-8 h-8 text-gold-500/40" />
+                  <div className="w-full h-full flex items-center justify-center bg-stoneWarm-200 text-stoneWarm-500">
+                    <BookOpen className="w-8 h-8 text-gold-600/40" />
                   </div>
                 )}
                 <div className="absolute top-3 left-3">
-                  <span className="px-2.5 py-1 rounded-md text-[10px] font-bold tracking-wider uppercase bg-[#121417]/90 text-gold-400 border border-gold-500/30 backdrop-blur-sm">
+                  <span className="px-2.5 py-1 rounded-md text-xs font-bold tracking-wider uppercase bg-white/95 text-stoneWarm-800 border border-stoneWarm-200 shadow-xs">
                     {post.category || 'Guide'}
                   </span>
                 </div>
@@ -100,23 +100,23 @@ export default function BlogSection({ blogPosts }) {
               {/* Card Body */}
               <div className="p-5 flex-1 flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center space-x-2 text-[11px] text-slate-400 mb-2">
-                    <Clock className="w-3.5 h-3.5 text-slate-500" />
+                  <div className="flex items-center space-x-2 text-xs text-stoneWarm-500 mb-2 font-medium">
+                    <Clock className="w-3.5 h-3.5 text-stoneWarm-400" />
                     <span>{post.readTime || '5 min read'}</span>
                   </div>
-                  <h3 className="text-white text-base font-semibold leading-snug group-hover:text-gold-400 transition-colors line-clamp-2 mb-2">
+                  <h3 className="text-stoneWarm-900 text-base font-bold leading-snug group-hover:text-gold-700 transition-colors line-clamp-2 mb-2">
                     <a href={`/blog/${post.slug}/`}>
                       {post.title}
                     </a>
                   </h3>
-                  <p className="text-slate-400 text-xs leading-relaxed line-clamp-3 mb-4">
+                  <p className="text-stoneWarm-600 text-xs leading-relaxed line-clamp-3 mb-4 font-normal">
                     {post.excerpt}
                   </p>
                 </div>
 
                 <a
                   href={`/blog/${post.slug}/`}
-                  className="inline-flex items-center space-x-1.5 text-xs font-semibold text-gold-400 hover:text-gold-300 pt-3 border-t border-slate-800/80 group-hover:translate-x-0.5 transition-transform"
+                  className="inline-flex items-center space-x-1.5 text-xs font-bold text-gold-700 hover:text-gold-800 pt-3 border-t border-stoneWarm-200 group-hover:translate-x-0.5 transition-transform"
                 >
                   <span>Read Guide</span>
                   <ArrowRight className="w-3.5 h-3.5" />

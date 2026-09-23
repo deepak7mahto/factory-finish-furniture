@@ -13,9 +13,11 @@
     "build:web": "npm run build --workspace=web",
     "build:studio": "npm run build --workspace=studio",
     "test": "npm run test --workspace=web",
-    "deploy": "gh-pages -d web/dist"
+    "deploy": "gh-pages -d web/dist",
+    "ag-kit": "ag-kit"
   },
   "devDependencies": {
+    "@vudovn/ag-kit": "^2026.8.31",
     "gh-pages": "^6.3.0"
   }
 }
