@@ -1,9 +1,9 @@
 import React from 'react';
-import { MessageCircle, PhoneCall, PlusCircle, Sparkles, MapPin, BookOpen } from 'lucide-react';
+import { MessageCircle, PhoneCall, Sparkles, MapPin, BookOpen } from 'lucide-react';
 import siteConfig from '../data/siteConfig.json';
 import { generateGeneralWhatsAppUrl } from '../utils/whatsapp';
 
-export default function Navbar({ onOpenAdmin, activeCategory, onSelectCategory, siteSettings }) {
+export default function Navbar({ activeCategory, onSelectCategory, siteSettings }) {
   const categories = [
     'All',
     'Sideboards & Consoles',
@@ -75,16 +75,6 @@ export default function Navbar({ onOpenAdmin, activeCategory, onSelectCategory, 
               <PhoneCall className="w-3.5 h-3.5 text-gold-600" />
               <span>{phoneDisplay}</span>
             </a>
-
-            {/* Admin / Add Listing */}
-            <button
-              onClick={onOpenAdmin}
-              className="flex items-center space-x-1.5 text-xs font-semibold text-stoneWarm-700 hover:text-stoneWarm-950 px-3 py-2 rounded-lg bg-stoneWarm-100 hover:bg-stoneWarm-200 border border-stoneWarm-200 transition"
-              title="Add Listing"
-            >
-              <PlusCircle className="w-4 h-4 text-gold-600" />
-              <span className="hidden md:inline">Add Listing</span>
-            </button>
 
             {/* Direct WhatsApp CTA */}
             <a

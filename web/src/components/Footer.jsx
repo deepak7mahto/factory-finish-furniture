@@ -3,7 +3,7 @@ import { MapPin, Phone, MessageCircle, ShieldCheck, Heart } from 'lucide-react';
 import siteConfig from '../data/siteConfig.json';
 import { generateGeneralWhatsAppUrl } from '../utils/whatsapp';
 
-export default function Footer({ onOpenAdmin, siteSettings, blogPosts }) {
+export default function Footer({ siteSettings, blogPosts }) {
   const brandName = siteSettings?.brandName || siteConfig.brandName;
   const tagline = siteSettings?.tagline || siteConfig.tagline;
   const warranty = siteSettings?.warrantyText || siteConfig.warranty;
@@ -111,12 +111,9 @@ export default function Footer({ onOpenAdmin, siteSettings, blogPosts }) {
                 </span>
               </li>
               <li>
-                <button
-                  onClick={onOpenAdmin}
-                  className="text-gold-400 hover:text-gold-300 transition underline underline-offset-2 text-xs font-medium"
-                >
-                  Admin: Import Listing
-                </button>
+                <span className="text-stoneWarm-300">
+                  Architectural Consultations by Appointment
+                </span>
               </li>
               <li className="text-stoneWarm-400 pt-2 text-xs">
                 Pan-India Safe Wooden Crating &amp; Transit Insurance

@@ -56,8 +56,20 @@ export default function App() {
       console.warn('Failed to load local custom products', e);
     }
 
+    // Hidden shortcut for workshop admin (Ctrl+Shift+A or ?admin=true)
+    const handleKeyDown = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
+        setIsAdminOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    if (new URLSearchParams(window.location.search).get('admin') === 'true') {
+      setIsAdminOpen(true);
+    }
+
     return () => {
       isMounted = false;
+      window.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
 
@@ -84,7 +96,6 @@ export default function App() {
       
       {/* Navigation Header */}
       <Navbar
-        onOpenAdmin={() => setIsAdminOpen(true)}
         activeCategory={activeCategory}
         siteSettings={siteSettings}
         onSelectCategory={(cat) => {
@@ -115,7 +126,6 @@ export default function App() {
 
       {/* Footer */}
       <Footer
-        onOpenAdmin={() => setIsAdminOpen(true)}
         siteSettings={siteSettings}
         blogPosts={blogPosts}
       />
