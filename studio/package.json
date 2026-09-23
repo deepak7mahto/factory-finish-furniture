@@ -11,15 +11,15 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@sanity/icons": "^3.0.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "sanity": "^3.67.0",
-    "styled-components": "^6.1.15"
+    "@sanity/icons": "^5.2.2",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "sanity": "^6.16.0",
+    "styled-components": "^6.5.3"
   },
   "devDependencies": {
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "typescript": "^5.6.3"
   }
 }

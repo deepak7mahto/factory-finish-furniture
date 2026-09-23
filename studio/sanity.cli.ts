@@ -6,4 +6,7 @@ export default defineCliConfig({
     dataset: 'production',
   },
   studioHost: 'factoryfinishfurniture',
+  deployment: {
+    appId: 'i4yxt5c9smjht6q4v2vwmy73',
+  },
 });
