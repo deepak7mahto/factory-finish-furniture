@@ -19,7 +19,10 @@ export default function ProductModal({ product, onClose }) {
 
   const getImgUrl = (path) => {
     if (!path) return null;
-    const clean = path.replace(/^\/?(images\/products\/)?/, '');
+    if (typeof path === 'string' && (path.startsWith('http://') || path.startsWith('https://'))) {
+      return path;
+    }
+    const clean = String(path).replace(/^\/?(images\/products\/)?/, '');
     return `${import.meta.env.BASE_URL}images/products/${clean}`;
   };
 

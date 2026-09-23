@@ -7,10 +7,18 @@ export default function ProductCard({ product, onSelect, index = 0 }) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
 
-  // Resolve image with Vite BASE_URL for GitHub Pages support
-  const cleanImage = product.image ? product.image.replace(/^\/?(images\/products\/)?/, '') : null;
-  const imageSource = cleanImage && !imageError
-    ? `${import.meta.env.BASE_URL}images/products/${cleanImage}`
+  // Resolve image: supports full CDN URLs (Sanity) or local relative assets
+  const resolveImageSource = (img) => {
+    if (!img) return null;
+    if (typeof img === 'string' && (img.startsWith('http://') || img.startsWith('https://'))) {
+      return img;
+    }
+    const clean = String(img).replace(/^\/?(images\/products\/)?/, '');
+    return `${import.meta.env.BASE_URL}images/products/${clean}`;
+  };
+
+  const imageSource = product.image && !imageError
+    ? resolveImageSource(product.image)
     : getCategorySvg(product.category, product.title);
 
   const photoCount = product.images ? product.images.length : (product.image ? 1 : 0);
