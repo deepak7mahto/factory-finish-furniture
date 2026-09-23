@@ -1,5 +1,6 @@
 import { createClient } from '@sanity/client';
 import createImageUrlBuilder from '@sanity/image-url';
+import localProducts from '../data/products.json';
 
 export const sanityClient = createClient({
   projectId: 'th649m10',
@@ -49,20 +50,40 @@ export async function fetchSanityProducts() {
     const docs = await sanityClient.fetch(query);
     if (!docs || docs.length === 0) return null;
 
-    // Normalize image URLs
+    // Normalize image URLs with reliable fallback to local images
     return docs.map((doc) => {
+      const matchingLocal = localProducts.find(
+        (lp) =>
+          lp.slug === doc.slug ||
+          lp.title?.trim().toLowerCase() === doc.title?.trim().toLowerCase()
+      );
+
       const coverUrl = doc.image ? urlFor(doc.image).width(960).height(720).url() : null;
-      const galleryUrls = doc.images && doc.images.length > 0
-        ? doc.images.map((img) => urlFor(img).width(1200).url())
-        : (coverUrl ? [coverUrl] : []);
+      const galleryUrls =
+        doc.images && doc.images.length > 0
+          ? doc.images.map((img) => urlFor(img).width(1200).url())
+          : coverUrl
+            ? [coverUrl]
+            : [];
+
+      // If Sanity document doesn't have an image asset attached yet, fall back to authentic local image
+      const finalImage = coverUrl || (matchingLocal ? matchingLocal.image : null);
+      const finalImages =
+        galleryUrls.length > 0
+          ? galleryUrls
+          : matchingLocal && matchingLocal.images && matchingLocal.images.length > 0
+            ? matchingLocal.images
+            : finalImage
+              ? [finalImage]
+              : [];
 
       return {
         ...doc,
         id: doc.id || doc._id,
-        image: coverUrl,
-        images: galleryUrls,
+        image: finalImage,
+        images: finalImages,
         price: doc.price || 0, // quotes on request
-        features: doc.features || [],
+        features: doc.features || (matchingLocal ? matchingLocal.features : []),
       };
     });
   } catch (error) {
