@@ -111,4 +111,48 @@ assert.strictEqual(cname, 'factoryfinishfurniture.com',
   `CNAME must contain factoryfinishfurniture.com, got: ${cname}`);
 console.log('✓ CNAME deploy guard verified');
 
+// === Blog Hub & Guides Verification ===
+const blogPages = [
+  { file: 'blog/index.html', path: 'blog/', type: 'CollectionPage' },
+  { file: 'blog/fluted-sideboards-delhi/index.html', path: 'blog/fluted-sideboards-delhi/', type: 'Article' },
+  { file: 'blog/pu-polish-guide/index.html', path: 'blog/pu-polish-guide/', type: 'Article' },
+  { file: 'blog/modern-crockery-units/index.html', path: 'blog/modern-crockery-units/', type: 'Article' },
+  { file: 'blog/wooden-pooja-mandir-designs/index.html', path: 'blog/wooden-pooja-mandir-designs/', type: 'Article' }
+];
+
+blogPages.forEach(({ file, path: urlPath, type }) => {
+  const fullPath = path.join(rootDir, file);
+  assert(fs.existsSync(fullPath), `${file} must exist`);
+  const content = fs.readFileSync(fullPath, 'utf-8');
+
+  // Canonical URL
+  const expectedCanonical = `<link rel="canonical" href="${DOMAIN}${urlPath}" />`;
+  assert(content.includes(expectedCanonical), `${file} missing canonical: ${expectedCanonical}`);
+
+  // Open Graph
+  assert(content.includes('property="og:title"'), `${file} missing og:title`);
+  assert(content.includes('property="og:image" content="https://'), `${file} missing absolute og:image`);
+
+  // WhatsApp CTA
+  assert(content.includes('wa.me/918826236138'), `${file} missing WhatsApp direct link`);
+
+  // Schema JSON-LD
+  const schemas = [];
+  let sMatch;
+  const sRegex = /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g;
+  while ((sMatch = sRegex.exec(content)) !== null) {
+    schemas.push(JSON.parse(sMatch[1].trim()));
+  }
+  assert(schemas.length >= 1, `${file} must have at least 1 Schema.org JSON-LD script`);
+  const foundTypes = schemas.map(s => s['@type']);
+  assert(foundTypes.includes(type), `${file} must have ${type} schema, found: ${foundTypes.join(', ')}`);
+
+  // Sitemap presence
+  assert(sitemap.includes(`<loc>${DOMAIN}${urlPath}</loc>`), `sitemap.xml must list ${DOMAIN}${urlPath}`);
+});
+
+console.log('✓ All 5 Blog pages & guides verified (Canonical, OG, WhatsApp CTA, Schema ' +
+  blogPages.map(b => b.type).join('/') + ', and sitemap entries)');
+
 console.log('\nALL SEO TESTS PASSED!\n');
+

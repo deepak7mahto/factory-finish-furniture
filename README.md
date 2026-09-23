@@ -26,8 +26,13 @@ Luxury architectural furniture catalog website for **Manish Prasad's Delhi facto
 
 ## SEO & Discoverability
 
-- **Schema.org JSON-LD** — `FurnitureStore` and `FAQPage` structured data for Google rich snippets
-- **Open Graph & Twitter Cards** — Rich preview cards for WhatsApp, LinkedIn, Facebook, and Twitter/X sharing
+- **Multi-Page Static Blog & Buying Guides** — 4 in-depth architectural guides (`/blog/`) with pre-rendered HTML for zero-JS Googlebot indexing and social preview cards:
+  - `/blog/fluted-sideboards-delhi/` — Living & dining room console sizing and style guide
+  - `/blog/pu-polish-guide/` — Automotive PU finish vs Melamine vs Laminate comparison
+  - `/blog/modern-crockery-units/` — Tinted glass and concealed LED display cabinets
+  - `/blog/wooden-pooja-mandir-designs/` — Vastu-compliant apartment temple designs
+- **Schema.org JSON-LD** — `FurnitureStore`, `FAQPage`, and `Article` structured data for Google rich snippets
+- **Open Graph & Twitter Cards** — Rich preview cards with 960×720 images for WhatsApp, LinkedIn, Facebook, and Twitter/X sharing
 - **Local SEO** — Geo-targeted meta tags for Delhi NCR (`IN-DL`)
 - **Core Web Vitals** — `fetchpriority="high"` on LCP images, `loading="lazy"` on below-fold cards
 
