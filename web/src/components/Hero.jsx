@@ -3,7 +3,35 @@ import { Factory, Sparkles, ShieldCheck, Truck, ArrowRight, MessageCircle } from
 import siteConfig from '../data/siteConfig.json';
 import { generateGeneralWhatsAppUrl } from '../utils/whatsapp';
 
-export default function Hero({ onExploreClick, productCount = 28 }) {
+const iconMap = {
+  0: { icon: Factory, color: 'text-gold-400', bg: 'bg-gold-500/10 border-gold-500/20' },
+  1: { icon: Sparkles, color: 'text-amber-400', bg: 'bg-amber-500/10 border-amber-500/20' },
+  2: { icon: ShieldCheck, color: 'text-emerald-400', bg: 'bg-emerald-500/10 border-emerald-500/20' },
+  3: { icon: Truck, color: 'text-blue-400', bg: 'bg-blue-500/10 border-blue-500/20' },
+};
+
+export default function Hero({ onExploreClick, productCount = 28, siteSettings }) {
+  const workshopLocation = siteSettings?.workshopLocation || 'Delhi Workshop';
+  const pillars = (siteSettings?.trustPillars && siteSettings.trustPillars.length > 0)
+    ? siteSettings.trustPillars
+    : [
+        {
+          title: '100% Factory Direct',
+          description: 'Buy directly from the manufacturing unit in Delhi. Save ₹15,000–₹40,000 per piece compared to branded retail showrooms.',
+        },
+        {
+          title: 'Automotive PU Polish',
+          description: 'Silky-smooth, non-yellowing Polyurethane polish with water and scratch-resistant topcoats in high-gloss or matte satin.',
+        },
+        {
+          title: '5-Year Warranty',
+          description: 'Guaranteed protection against paint discoloration, edge peeling, and structural workmanship defects.',
+        },
+        {
+          title: 'Pan-India Delivery',
+          description: 'Heavy-duty wooden crated packaging with bubble wrapping and transit coverage for safe doorstep delivery across India.',
+        },
+      ];
   return (
     <section className="relative overflow-hidden pt-12 pb-16 md:pt-20 md:pb-24 bg-gradient-to-b from-[#121417] via-[#101215] to-[#0f1114]">
       {/* Subtle Background Glow Elements */}
@@ -51,49 +79,26 @@ export default function Hero({ onExploreClick, productCount = 28 }) {
           </div>
         </div>
 
-        {/* 4 Trust Pillars */}
+        {/* Trust Pillars */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 pt-6 border-t border-slate-800/80">
-          
-          <div className="bg-[#16191d]/80 border border-slate-800/80 rounded-2xl p-5 hover:border-gold-500/30 transition-colors">
-            <div className="w-10 h-10 rounded-xl bg-gold-500/10 border border-gold-500/20 flex items-center justify-center mb-3">
-              <Factory className="w-5 h-5 text-gold-400" />
-            </div>
-            <h3 className="text-white font-semibold text-sm mb-1">100% Factory Direct</h3>
-            <p className="text-slate-400 text-xs leading-relaxed">
-              Buy directly from the manufacturing unit in Delhi. Save ₹15,000–₹40,000 per piece compared to branded retail showrooms.
-            </p>
-          </div>
-
-          <div className="bg-[#16191d]/80 border border-slate-800/80 rounded-2xl p-5 hover:border-gold-500/30 transition-colors">
-            <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mb-3">
-              <Sparkles className="w-5 h-5 text-amber-400" />
-            </div>
-            <h3 className="text-white font-semibold text-sm mb-1">Automotive PU Polish</h3>
-            <p className="text-slate-400 text-xs leading-relaxed">
-              Silky-smooth, non-yellowing Polyurethane polish with water and scratch-resistant topcoats in high-gloss or matte satin.
-            </p>
-          </div>
-
-          <div className="bg-[#16191d]/80 border border-slate-800/80 rounded-2xl p-5 hover:border-gold-500/30 transition-colors">
-            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mb-3">
-              <ShieldCheck className="w-5 h-5 text-emerald-400" />
-            </div>
-            <h3 className="text-white font-semibold text-sm mb-1">5-Year Warranty</h3>
-            <p className="text-slate-400 text-xs leading-relaxed">
-              Guaranteed protection against paint discoloration, edge peeling, and structural workmanship defects.
-            </p>
-          </div>
-
-          <div className="bg-[#16191d]/80 border border-slate-800/80 rounded-2xl p-5 hover:border-gold-500/30 transition-colors">
-            <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-3">
-              <Truck className="w-5 h-5 text-blue-400" />
-            </div>
-            <h3 className="text-white font-semibold text-sm mb-1">Pan-India Delivery</h3>
-            <p className="text-slate-400 text-xs leading-relaxed">
-              Heavy-duty wooden crated packaging with bubble wrapping and transit coverage for safe doorstep delivery across India.
-            </p>
-          </div>
-
+          {pillars.map((pillar, idx) => {
+            const style = iconMap[idx % 4];
+            const IconComponent = style.icon;
+            return (
+              <div
+                key={pillar.title || idx}
+                className="bg-[#16191d]/80 border border-slate-800/80 rounded-2xl p-5 hover:border-gold-500/30 transition-colors"
+              >
+                <div className={`w-10 h-10 rounded-xl ${style.bg} border flex items-center justify-center mb-3`}>
+                  <IconComponent className={`w-5 h-5 ${style.color}`} />
+                </div>
+                <h3 className="text-white font-semibold text-sm mb-1">{pillar.title}</h3>
+                <p className="text-slate-400 text-xs leading-relaxed">
+                  {pillar.description || pillar.desc}
+                </p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

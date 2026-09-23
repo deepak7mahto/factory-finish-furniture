@@ -3,7 +3,7 @@ import { MessageCircle, PhoneCall, PlusCircle, Sparkles, MapPin, BookOpen } from
 import siteConfig from '../data/siteConfig.json';
 import { generateGeneralWhatsAppUrl } from '../utils/whatsapp';
 
-export default function Navbar({ onOpenAdmin, activeCategory, onSelectCategory }) {
+export default function Navbar({ onOpenAdmin, activeCategory, onSelectCategory, siteSettings }) {
   const categories = [
     'All',
     'Sideboards & Consoles',
@@ -13,18 +13,22 @@ export default function Navbar({ onOpenAdmin, activeCategory, onSelectCategory }
     'Pooja Mandirs'
   ];
 
+  const announcement = siteSettings?.announcementBar || 'FACTORY-DIRECT SAVINGS: SAVE 40-50% VS RETAIL SHOWROOMS';
+  const phoneDisplay = siteSettings?.phoneDisplay || siteConfig.phoneDisplay;
+  const workshopLocation = siteSettings?.workshopLocation || 'Delhi NCR Workshop • Pan-India Delivery';
+
   return (
     <header className="sticky top-0 z-40 bg-[#121417]/95 backdrop-blur-md border-b border-gold-500/20 shadow-xl">
       {/* Top Announcement Bar */}
       <div className="bg-gradient-to-r from-gold-700 via-gold-500 to-gold-700 text-charcoal-950 px-4 py-1.5 text-xs font-semibold text-center flex items-center justify-center space-x-3">
         <span className="flex items-center space-x-1">
           <Sparkles className="w-3.5 h-3.5" />
-          <span>FACTORY-DIRECT SAVINGS: SAVE 40-50% VS RETAIL SHOWROOMS</span>
+          <span>{announcement}</span>
         </span>
         <span className="hidden md:inline">•</span>
         <span className="hidden md:flex items-center space-x-1">
           <MapPin className="w-3.5 h-3.5" />
-          <span>Delhi NCR Workshop • Pan-India Delivery</span>
+          <span>{workshopLocation}</span>
         </span>
       </div>
 
@@ -64,12 +68,12 @@ export default function Navbar({ onOpenAdmin, activeCategory, onSelectCategory }
 
             {/* Phone Quick Call */}
             <a
-              href={`tel:${siteConfig.phoneDisplay.replace(/\s+/g, '')}`}
+              href={`tel:${phoneDisplay.replace(/\s+/g, '')}`}
               className="hidden sm:flex items-center space-x-2 text-xs font-medium text-slate-300 hover:text-white px-3 py-2 rounded-lg border border-slate-700/60 hover:border-slate-600 transition"
               title="Call Workshop"
             >
               <PhoneCall className="w-3.5 h-3.5 text-gold-400" />
-              <span>{siteConfig.phoneDisplay}</span>
+              <span>{phoneDisplay}</span>
             </a>
 
             {/* Admin / Add Listing */}

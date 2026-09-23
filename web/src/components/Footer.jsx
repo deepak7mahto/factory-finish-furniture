@@ -3,7 +3,25 @@ import { MapPin, Phone, MessageCircle, ShieldCheck, Heart } from 'lucide-react';
 import siteConfig from '../data/siteConfig.json';
 import { generateGeneralWhatsAppUrl } from '../utils/whatsapp';
 
-export default function Footer({ onOpenAdmin }) {
+export default function Footer({ onOpenAdmin, siteSettings, blogPosts }) {
+  const brandName = siteSettings?.brandName || siteConfig.brandName;
+  const tagline = siteSettings?.tagline || siteConfig.tagline;
+  const warranty = siteSettings?.warrantyText || siteConfig.warranty;
+  const location = siteSettings?.workshopLocation || siteConfig.location;
+  const phoneDisplay = siteSettings?.phoneDisplay || siteConfig.phoneDisplay;
+  const whatsappNumber = siteSettings?.whatsappNumber || siteConfig.whatsappNumber;
+
+  const defaultBlogs = [
+    { title: 'Fluted Sideboards & Consoles', slug: 'fluted-sideboards-delhi' },
+    { title: 'PU Polish vs Melamine Guide', slug: 'pu-polish-guide' },
+    { title: 'Modern Crockery Units', slug: 'modern-crockery-units' },
+    { title: 'Wooden Pooja Mandir Vastu', slug: 'wooden-pooja-mandir-designs' },
+  ];
+
+  const guides = blogPosts && blogPosts.length > 0
+    ? blogPosts.slice(0, 4)
+    : defaultBlogs;
+
   return (
     <footer className="bg-[#0c0e11] border-t border-slate-800 text-slate-400 text-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -13,18 +31,15 @@ export default function Footer({ onOpenAdmin }) {
           <div>
             <div className="flex items-center space-x-2 mb-3">
               <span className="text-xl font-bold tracking-widest text-white font-luxury">
-                FACTORY FINISH
-              </span>
-              <span className="text-[10px] px-2 py-0.5 rounded bg-gold-500/10 border border-gold-500/30 text-gold-400 font-sans">
-                FURNITURE
+                {brandName.toUpperCase()}
               </span>
             </div>
             <p className="text-slate-400 text-xs leading-relaxed mb-4">
-              {siteConfig.tagline}. High-end fluted sideboards, center glass showcases, and custom wardrobes with 5-year finish warranty.
+              {tagline}. High-end fluted sideboards, center glass showcases, and custom wardrobes with 5-year finish warranty.
             </p>
             <div className="flex items-center space-x-2 text-emerald-400 text-xs">
               <ShieldCheck className="w-4 h-4" />
-              <span>{siteConfig.warranty}</span>
+              <span>{warranty}</span>
             </div>
           </div>
 
@@ -34,28 +49,15 @@ export default function Footer({ onOpenAdmin }) {
               Design Guides
             </h4>
             <ul className="space-y-2 text-xs">
+              {guides.map((g) => (
+                <li key={g.slug}>
+                  <a href={`/blog/${g.slug}/`} className="text-slate-400 hover:text-gold-400 transition">
+                    {g.title}
+                  </a>
+                </li>
+              ))}
               <li>
-                <a href="/blog/fluted-sideboards-delhi/" class="text-slate-400 hover:text-gold-400 transition">
-                  Fluted Sideboards &amp; Consoles
-                </a>
-              </li>
-              <li>
-                <a href="/blog/pu-polish-guide/" class="text-slate-400 hover:text-gold-400 transition">
-                  PU Polish vs Melamine Guide
-                </a>
-              </li>
-              <li>
-                <a href="/blog/modern-crockery-units/" class="text-slate-400 hover:text-gold-400 transition">
-                  Modern Crockery Units
-                </a>
-              </li>
-              <li>
-                <a href="/blog/wooden-pooja-mandir-designs/" class="text-slate-400 hover:text-gold-400 transition">
-                  Wooden Pooja Mandir Vastu
-                </a>
-              </li>
-              <li>
-                <a href="/blog/" class="text-gold-400 hover:underline pt-1 inline-block font-medium">
+                <a href="/blog/" className="text-gold-400 hover:underline pt-1 inline-block font-medium">
                   View All Guides →
                 </a>
               </li>
@@ -70,12 +72,12 @@ export default function Footer({ onOpenAdmin }) {
             <ul className="space-y-2 text-xs">
               <li className="flex items-center space-x-2">
                 <MapPin className="w-3.5 h-3.5 text-gold-400 shrink-0" />
-                <span>{siteConfig.location}</span>
+                <span>{location}</span>
               </li>
               <li className="flex items-center space-x-2">
                 <Phone className="w-3.5 h-3.5 text-gold-400 shrink-0" />
-                <a href={`tel:${siteConfig.phoneDisplay.replace(/\s+/g, '')}`} className="hover:text-white transition">
-                  {siteConfig.phoneDisplay}
+                <a href={`tel:${phoneDisplay.replace(/\s+/g, '')}`} className="hover:text-white transition">
+                  {phoneDisplay}
                 </a>
               </li>
               <li className="flex items-center space-x-2">
@@ -86,7 +88,7 @@ export default function Footer({ onOpenAdmin }) {
                   rel="noopener noreferrer"
                   className="hover:text-[#25D366] transition"
                 >
-                  WhatsApp: +{siteConfig.whatsappNumber}
+                  WhatsApp: +{whatsappNumber}
                 </a>
               </li>
             </ul>

@@ -91,3 +91,63 @@ export async function fetchSanityProducts() {
     return null;
   }
 }
+
+/**
+ * Fetch dynamic website settings from Sanity (singleton)
+ */
+export async function fetchSiteSettings() {
+  const query = `*[_type == "siteSettings"][0]{
+    brandName,
+    tagline,
+    whatsappNumber,
+    phoneDisplay,
+    workshopLocation,
+    announcementBar,
+    warrantyText,
+    trustPillars
+  }`;
+
+  try {
+    const data = await sanityClient.fetch(query);
+    if (!data || !data.brandName) return null;
+    return data;
+  } catch (error) {
+    console.warn('[Sanity] Could not fetch siteSettings, falling back to local config:', error.message);
+    return null;
+  }
+}
+
+/**
+ * Fetch dynamic blog posts / design guides from Sanity
+ */
+export async function fetchBlogPosts() {
+  const query = `*[_type == "blogPost"] | order(publishedAt desc) {
+    _id,
+    title,
+    "slug": slug.current,
+    category,
+    publishedAt,
+    readTime,
+    excerpt,
+    coverImage
+  }`;
+
+  try {
+    const docs = await sanityClient.fetch(query);
+    if (!docs || docs.length === 0) return null;
+
+    return docs.map((post) => {
+      const coverUrl = post.coverImage
+        ? urlFor(post.coverImage).width(800).height(500).url()
+        : null;
+
+      return {
+        ...post,
+        coverUrl,
+      };
+    });
+  } catch (error) {
+    console.warn('[Sanity] Could not fetch blogPosts:', error.message);
+    return null;
+  }
+}

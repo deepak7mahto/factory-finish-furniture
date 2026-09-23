@@ -7,22 +7,39 @@ import CustomBanner from './components/CustomBanner';
 import Footer from './components/Footer';
 import ProductModal from './components/ProductModal';
 import AdminImporter from './components/AdminImporter';
-import { fetchSanityProducts } from './utils/sanity';
+import BlogSection from './components/BlogSection';
+import { fetchSanityProducts, fetchSiteSettings, fetchBlogPosts } from './utils/sanity';
 
 export default function App() {
   const [products, setProducts] = useState(initialProducts);
+  const [siteSettings, setSiteSettings] = useState(null);
+  const [blogPosts, setBlogPosts] = useState([]);
   const [activeCategory, setActiveCategory] = useState('All');
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
 
-  // Load products from Sanity with seamless local fallback
+  // Load products, siteSettings, and blog posts from Sanity with seamless local fallback
   useEffect(() => {
     let isMounted = true;
 
-    // Check Sanity live dataset
+    // 1. Fetch products
     fetchSanityProducts().then((sanityProducts) => {
       if (isMounted && sanityProducts && sanityProducts.length > 0) {
         setProducts(sanityProducts);
+      }
+    });
+
+    // 2. Fetch site settings & brand configuration
+    fetchSiteSettings().then((settings) => {
+      if (isMounted && settings) {
+        setSiteSettings(settings);
+      }
+    });
+
+    // 3. Fetch design guides / blog posts
+    fetchBlogPosts().then((posts) => {
+      if (isMounted && posts && posts.length > 0) {
+        setBlogPosts(posts);
       }
     });
 
@@ -69,6 +86,7 @@ export default function App() {
       <Navbar
         onOpenAdmin={() => setIsAdminOpen(true)}
         activeCategory={activeCategory}
+        siteSettings={siteSettings}
         onSelectCategory={(cat) => {
           setActiveCategory(cat);
           handleExploreClick();
@@ -77,7 +95,11 @@ export default function App() {
 
       {/* Main Content Area */}
       <main className="flex-1">
-        <Hero onExploreClick={handleExploreClick} productCount={products.length} />
+        <Hero
+          onExploreClick={handleExploreClick}
+          productCount={products.length}
+          siteSettings={siteSettings}
+        />
 
         <ProductGrid
           products={products}
@@ -86,11 +108,17 @@ export default function App() {
           onSelectProduct={setSelectedProduct}
         />
 
+        <BlogSection blogPosts={blogPosts} />
+
         <CustomBanner />
       </main>
 
       {/* Footer */}
-      <Footer onOpenAdmin={() => setIsAdminOpen(true)} />
+      <Footer
+        onOpenAdmin={() => setIsAdminOpen(true)}
+        siteSettings={siteSettings}
+        blogPosts={blogPosts}
+      />
 
       {/* Deep-Dive Product Details Modal */}
       {selectedProduct && (
