@@ -16,6 +16,19 @@ factory-finish-furniture/
 └── package.json (npm workspaces orchestrator)
 ```
 
+## Documentation & Knowledge Base
+
+Comprehensive architectural, operational, and commercial documentation is located in the **[`docs/`](docs/)** directory:
+
+- 📖 **[Documentation Master Index](docs/README.md)**
+- 🏗️ **[01. Architecture & Technology Stack](docs/01-architecture-and-stack.md)**
+- 🏷️ **[02. Business Rules & Brand Identity (Price-Hidden Architecture)](docs/02-business-rules-and-brand.md)**
+- 🪚 **[03. Catalog Specifications & Craftsmanship Standards](docs/03-catalog-specifications.md)**
+- ☁️ **[04. Sanity Headless CMS Guide & Studio Operations](docs/04-sanity-cms-guide.md)**
+- 🖼️ **[05. Data Pipelines, Media Assets & Synchronization](docs/05-data-pipelines-and-assets.md)**
+- 🔍 **[06. SEO, Structured Data & Content Marketing Strategy](docs/06-seo-and-content-strategy.md)**
+- 🛠️ **[07. Developer & Operational Playbook](docs/07-developer-playbook.md)**
+
 ---
 
 ## Features
