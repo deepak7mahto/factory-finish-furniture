@@ -7,6 +7,7 @@ import CustomBanner from './components/CustomBanner';
 import Footer from './components/Footer';
 import ProductModal from './components/ProductModal';
 import AdminImporter from './components/AdminImporter';
+import { fetchSanityProducts } from './utils/sanity';
 
 export default function App() {
   const [products, setProducts] = useState(initialProducts);
@@ -14,19 +15,33 @@ export default function App() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
 
-  // Load custom products saved locally if any
+  // Load products from Sanity with seamless local fallback
   useEffect(() => {
+    let isMounted = true;
+
+    // Check Sanity live dataset
+    fetchSanityProducts().then((sanityProducts) => {
+      if (isMounted && sanityProducts && sanityProducts.length > 0) {
+        setProducts(sanityProducts);
+      }
+    });
+
+    // Also support local testing additions
     try {
       const saved = localStorage.getItem('fff_custom_products');
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          setProducts([...parsed, ...initialProducts]);
+          setProducts((current) => [...parsed, ...current]);
         }
       }
     } catch (e) {
       console.warn('Failed to load local custom products', e);
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const handleAddProductToCatalog = (newProduct) => {
