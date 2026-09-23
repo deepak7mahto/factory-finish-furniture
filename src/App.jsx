@@ -85,7 +85,7 @@ export default function App() {
         />
       )}
 
-      {/* Facebook Marketplace "Paste & Parse" Admin Drawer/Modal */}
+      {/* Admin: Paste & Parse Listing Importer */}
       <AdminImporter
         isOpen={isAdminOpen}
         onClose={() => setIsAdminOpen(false)}

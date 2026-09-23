@@ -156,7 +156,7 @@ export default function ProductModal({ product, onClose }) {
                 </span>
               </div>
 
-              {/* Authentic Facebook Description */}
+              {/* Product Description & Craftsmanship Details */}
               {product.description && (
                 <div className="mt-5 p-4 rounded-2xl bg-[#111316] border border-slate-800/90 text-xs text-slate-300">
                   <span className="text-[11px] font-semibold text-gold-400/90 uppercase tracking-wider block mb-2">

@@ -3,7 +3,7 @@ import { MessageCircle, Eye, Shield, Ruler, Sparkles } from 'lucide-react';
 import { generateWhatsAppUrl } from '../utils/whatsapp';
 import { getCategorySvg } from '../utils/placeholders';
 
-export default function ProductCard({ product, onSelect }) {
+export default function ProductCard({ product, onSelect, index = 0 }) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
 
@@ -14,15 +14,18 @@ export default function ProductCard({ product, onSelect }) {
     : getCategorySvg(product.category, product.title);
 
   const photoCount = product.images ? product.images.length : (product.image ? 1 : 0);
+  const isAboveFold = index < 2;
 
   return (
-    <div className="group bg-[#15171b] border border-slate-800/90 rounded-2xl overflow-hidden hover:border-gold-500/40 hover:shadow-2xl hover:shadow-gold-500/5 transition-all duration-300 flex flex-col justify-between">
+    <article className="group bg-[#15171b] border border-slate-800/90 rounded-2xl overflow-hidden hover:border-gold-500/40 hover:shadow-2xl hover:shadow-gold-500/5 transition-all duration-300 flex flex-col justify-between">
       <div>
         {/* Image Container with Badges */}
         <div className="relative aspect-[16/10] bg-[#1a1d22] overflow-hidden cursor-pointer" onClick={() => onSelect(product)}>
           <img
             src={imageSource}
-            alt={product.title}
+            alt={`${product.title} - Handcrafted Luxury Furniture Delhi`}
+            loading={isAboveFold ? undefined : 'lazy'}
+            fetchPriority={isAboveFold ? 'high' : undefined}
             onError={() => setImageError(true)}
             onLoad={() => setImageLoaded(true)}
             className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
@@ -133,6 +136,6 @@ export default function ProductCard({ product, onSelect }) {
           <span>Get Price</span>
         </a>
       </div>
-    </div>
+    </article>
   );
 }

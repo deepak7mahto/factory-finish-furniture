@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "deploy": "gh-pages -d dist",
-    "test": "node test/catalog.test.cjs && node test/utils.test.cjs"
+    "test": "node test/catalog.test.cjs && node test/utils.test.cjs && node test/seo.test.cjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",
