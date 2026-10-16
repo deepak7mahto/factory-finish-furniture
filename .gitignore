@@ -6,3 +6,8 @@ dist-ssr
 *.ndjson
 .ag-kit-backups
 
+# Environment and secrets
+.env
+.env*.local
+.env.*
+!.env.example
